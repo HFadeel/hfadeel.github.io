@@ -13,7 +13,7 @@ baseurl: ''
 lang: en
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: Asia/Shanghai
+timezone: America/Los_Angeles
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
@@ -27,8 +27,8 @@ description:
 # fill in the protocol & hostname for your site, e.g., 'https://username.github.io'
 url: 'https://hfadeel.github.io/'
 
-github:
-  username: hfadeel             # change to your github username
+#github:
+#  username: hfadeel             # change to your github username
 
 #twitter:
 #  username: twitter_username            # change to your twitter username
