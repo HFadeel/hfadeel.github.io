@@ -1,78 +1,138 @@
 [
   
   {
-    "title": "Enable Google Page Views",
-    "url": "/posts/enable-google-pv/",
-    "categories": "Blogging, Tutorial",
-    "tags": "google analytics, pageviews",
-    "date": "2021-01-03 16:32:00 -0700",
+    "title": "Decoupled Transformer",
+    "url": "/posts/dc/",
+    "categories": "",
+    "tags": "",
+    "date": "2021-06-01 19:32:00 -0700",
     
 
 
 
 
 
-    "snippet": "This post is to enable Page Views on the Chirpy theme based blog that you just built. This requires technical knowledge and it’s recommended to keep the google_analytics.pv.* empty unless you have a good reason. If your website has low traffic, the page views count would discourage you to write m..."
+    "snippet": "How much Attention is really needed?1. IntroductionTransformer models (e.g. BERT, RoBERTa, ELECTRA) have revolutionized the natural language processing space. Since its introduction there have been many new state-of-the-art  results  in  MRC, NLI, NLU and machine translation. Yet Transformer mode..."
   },
   
   {
-    "title": "Customize the Favicon",
-    "url": "/posts/customize-the-favicon/",
-    "categories": "Blogging, Tutorial",
-    "tags": "favicon",
-    "date": "2019-08-10 09:34:00 -0700",
+    "title": "Knowledge Distillation Part 1 - Large to Large - Can student exceed the teacher",
+    "url": "/posts/kd1/",
+    "categories": "",
+    "tags": "",
+    "date": "2021-03-03 19:32:00 -0700",
     
 
 
 
 
 
-    "snippet": "The favicons of Chirpy are placed in the directory assets/img/favicons/. You may need to replace them with your own. The following sections will guide you how to create and replace the default favicons.Generate the faviconPrepare a square image (PNG, JPG, or SVG) with a size of 512x512 or more, a..."
+    "snippet": "Part 1 - Large to Large : Can student exceed the teacher1. IntroductionKnowledge Distillation is the process of transferring knowledge from a model to another model, usually a smaller one.Supervised Machine learning relies on labels. Yet these labels provide limited signals. For example, in image..."
   },
   
   {
-    "title": "Getting Started",
-    "url": "/posts/getting-started/",
-    "categories": "Blogging, Tutorial",
-    "tags": "getting started",
-    "date": "2019-08-09 05:55:00 -0700",
+    "title": "ROaD-Electra Robustly Optimized and Distilled Electra 2",
+    "url": "/posts/road2/",
+    "categories": "",
+    "tags": "",
+    "date": "2020-12-25 19:32:00 -0700",
     
 
 
 
 
 
-    "snippet": "PrerequisitesFollow the Jekyll Docs to complete the installation of Ruby, RubyGems, Jekyll and Bundler. Please note that the version of Ruby must meet the requirements of the theme on RubyGems.org.InstallationThere are two ways to get the theme:  Install from RubyGems - Easy to update, isolate ir..."
+    "snippet": "Building the best Base sized Transformer model.TL;DR  We present a new state-of-the-art base transformer model for machine reading comprehension that has almost 5% higher F1 score compared to ELECTRA-Base and 2% higher F1 score than the previous state-of-the-art base model (DeBERTa). This Model a..."
   },
   
   {
-    "title": "Writing a New Post",
-    "url": "/posts/write-a-new-post/",
-    "categories": "Blogging, Tutorial",
-    "tags": "writing",
-    "date": "2019-08-07 23:10:00 -0700",
+    "title": "ROaD-Electra Robustly Optimized and Distilled Electra 1",
+    "url": "/posts/road1/",
+    "categories": "",
+    "tags": "",
+    "date": "2020-10-10 19:32:00 -0700",
     
 
 
 
 
 
-    "snippet": "Naming and PathCreate a new file named YYYY-MM-DD-TITLE.EXTENSION and put it in the _posts/ of the root directory. Please note that the EXTENSION must be one of md and markdown.Front MatterBasically, you need to fill the Front Matter as below at the top of the post:---title: TITLEdate: YYYY-MM-DD..."
+    "snippet": "Build state-of-the-art Transformer models for QnA, NLI and NLU.TL;DR  We present a new multi-task pre training method that improves the transformer performance, generalization, and robustness.  We present a new variation of knowledge distillation that improves the teacher signal.  A new state-of-..."
   },
   
   {
-    "title": "Text and Typography",
-    "url": "/posts/text-and-typography/",
-    "categories": "Blogging, Demo",
-    "tags": "typography",
-    "date": "2019-08-07 20:33:00 -0700",
+    "title": "New Models and Old Tricks",
+    "url": "/posts/old_tricks/",
+    "categories": "",
+    "tags": "",
+    "date": "2020-05-10 19:32:00 -0700",
     
 
 
 
 
 
-    "snippet": "This post is to show Markdown syntax rendering on Chirpy, you can also use it as an example of writing. Now, let’s start looking at text and typography.TitlesH1 - headingH2 - headingH3 - headingH4 - headingParagraphI wandered lonely as a cloudThat floats on high o’er vales and hills,When all at o..."
+    "snippet": "It seems tricks (e.g. Data Augmentation, Label smoothing, Mixout) are approaching their limits to improve SoTA models on SQUAD 2.0 and NQANatural Language Understanding models have been getting better and better, from ELMo, BERT, GPT, to ALBERT, RoBERTa, ELECTRA and DeBERTa. We already suppress h..."
+  },
+  
+  {
+    "title": "Fast way to count zeros",
+    "url": "/posts/count-zeros/",
+    "categories": "",
+    "tags": "",
+    "date": "2019-08-10 19:32:00 -0700",
+    
+
+
+
+
+
+    "snippet": "Population count is a procedure of counting the number of ones in a bit string. It is used in many applications such as Hamming distance, cardinality count in Bitarray, Binary Neural Networks and many other applications.All major CPU vendors (Intel since 2008, AMD 2007, ARM in NEON) have such ins..."
+  },
+  
+  {
+    "title": "What is understanding - AI Prospective",
+    "url": "/posts/understanding/",
+    "categories": "",
+    "tags": "",
+    "date": "2019-05-10 19:32:00 -0700",
+    
+
+
+
+
+
+    "snippet": "Originally written in 2014In 2013 I faced this question, I took a week off from my startup and thought about this question, ‘What is understanding?’ Here is what I came up with:Let’s start with a bit of history:The AI philosophy was based on the dominant trend in psychology during the first half ..."
+  },
+  
+  {
+    "title": "How academic division of AI, limits AI progress",
+    "url": "/posts/ai/",
+    "categories": "",
+    "tags": "",
+    "date": "2019-02-10 19:32:00 -0700",
+    
+
+
+
+
+
+    "snippet": "One of the fundamental problems in the current AI approaches is that it typically throws out much of the structure of the world before they start.To understand language, for example, one must understand how language is about the world, but academic divisions within AI treat language as divorced f..."
+  },
+  
+  {
+    "title": "Gaussian Label Smoothing",
+    "url": "/posts/gls/",
+    "categories": "",
+    "tags": "",
+    "date": "2018-12-10 19:32:00 -0700",
+    
+
+
+
+
+
+    "snippet": "The generalization of neural networks can often be improved by using label smoothing which is soft targets that are a weighted average of the hard targets and the uniform distribution over labels. We introduce a new variation of label smoothing that improve the performance of sequence-based model..."
   }
   
 ]
