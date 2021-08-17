@@ -617,7 +617,8 @@ $sidebar-display: "sidebar-display";
   overflow-y: auto;
   width: $sidebar-width;
   z-index: 99;
-  background: var(--sidebar-bg);
+  background: url('/assets/img/about/s2.jpg');
+  /* background: var(--sidebar-bg); */
 
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
@@ -645,8 +646,8 @@ $sidebar-display: "sidebar-display";
 
     > a {
       display: block;
-      width: 6rem;
-      height: 6rem;
+      width: 7rem;
+      height: 7rem;
       border-radius: 50%;
       border: 2px solid #b6b6b6;
       overflow: hidden;
@@ -1112,8 +1113,8 @@ $sidebar-display: "sidebar-display";
   }
 
   #avatar > a {
-    width: 5rem;
-    height: 5rem;
+    width: 6rem;
+    height: 6rem;
   }
 
   .site-subtitle {
@@ -1535,8 +1536,8 @@ $sidebar-display: "sidebar-display";
         @extend %profile-ml;
 
         > a {
-          width: 6.2rem;
-          height: 6.2rem;
+          width: 8rem;
+          height: 8rem;
           &.mx-auto {
             margin-left: 0 !important;
           }
