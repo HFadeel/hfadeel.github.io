@@ -23,7 +23,7 @@ Outside of work, Haytham is an alpine climber.
 
 ![Desktop View](/assets/img/about/1.jpg){: width="340" .left }
 ![Desktop View](/assets/img/about/2.jpg){: width="340" .left }
-![Desktop View](/assets/img/about/3.jpg){: width="340" .left }
+![Desktop View](/assets/img/about/31.jpg){: width="340" .left }
 ![Desktop View](/assets/img/about/6.jpg){: width="340" .left }
 ![Desktop View](/assets/img/about/4.jpg){: width="340" .left }
 ![Desktop View](/assets/img/about/5.jpg){: width="340" .left }
