@@ -4,7 +4,7 @@
   <id>https://hfadeel.github.io//</id>
   <title>Haytham ElFadeel</title>
   <subtitle></subtitle>
-  <updated>2021-08-16T23:31:03-07:00</updated>
+  <updated>2021-08-16T23:57:00-07:00</updated>
   <author>
     <name>Haytham ElFadeel</name>
     <uri>https://hfadeel.github.io//</uri>
@@ -24,7 +24,7 @@
     <link href="https://hfadeel.github.io//posts/dc/" rel="alternate" type="text/html" title="Decoupled Transformer" />
     <published>2021-06-01T19:32:00-07:00</published>
   
-    <updated>2021-06-01T19:32:00-07:00</updated>
+    <updated>2021-08-16T23:56:30-07:00</updated>
   
     <id>https://hfadeel.github.io//posts/dc/</id>
     <content src="https://hfadeel.github.io//posts/dc/" />
@@ -44,11 +44,12 @@
 
 
 
-      How much Attention is really needed?
+      1. Introduction
 
-1. Introduction
+Transformer models (e.g. BERT, RoBERTa, ELECTRA) have revolutionized the natural language processing space. Since its introduction there have been many new state-of-the-art  results  in  MRC, NLI, NLU and machine translation. Yet Transformer models are very computationally expensive. There are three major factors that make Transformers models (encoders) expensive:
 
-Transformer models (e.g. BERT, RoBERTa, ELECTRA) have revolutionized the natural language processing space. Since its introduction there have been many new state-of-the-art  results  in  MRC, NLI, NLU and machine translation. Yet Transformer models are very computationally expensive. There are three major factors that make Transformers mode...
+
+  The size ...
     </summary>
   
 
@@ -56,11 +57,11 @@ Transformer models (e.g. BERT, RoBERTa, ELECTRA) have revolutionized the natural
 
   
   <entry>
-    <title>Knowledge Distillation Part 1 - Large to Large - Can student exceed the teacher</title>
-    <link href="https://hfadeel.github.io//posts/kd1/" rel="alternate" type="text/html" title="Knowledge Distillation Part 1 - Large to Large - Can student exceed the teacher" />
+    <title>Knowledge Distillation Part 1</title>
+    <link href="https://hfadeel.github.io//posts/kd1/" rel="alternate" type="text/html" title="Knowledge Distillation Part 1" />
     <published>2021-03-03T19:32:00-07:00</published>
   
-    <updated>2021-03-03T19:32:00-07:00</updated>
+    <updated>2021-08-16T23:56:30-07:00</updated>
   
     <id>https://hfadeel.github.io//posts/kd1/</id>
     <content src="https://hfadeel.github.io//posts/kd1/" />
@@ -80,13 +81,11 @@ Transformer models (e.g. BERT, RoBERTa, ELECTRA) have revolutionized the natural
 
 
 
-      Part 1 - Large to Large : Can student exceed the teacher
-
-1. Introduction
+      1. Introduction
 
 Knowledge Distillation is the process of transferring knowledge from a model to another model, usually a smaller one.
 
-Supervised Machine learning relies on labels. Yet these labels provide limited signals. For example, in image recognition tasks, the labels are one-hot vectors with the entire probability assigned to the...
+Supervised Machine learning relies on labels. Yet these labels provide limited signals. For example, in image recognition tasks, the labels are one-hot vectors with the entire probability assigned to the correct label; those labels do not provide any signal (in...
     </summary>
   
 
@@ -98,7 +97,7 @@ Supervised Machine learning relies on labels. Yet these labels provide limited s
     <link href="https://hfadeel.github.io//posts/road2/" rel="alternate" type="text/html" title="ROaD-Electra Robustly Optimized and Distilled Electra 2" />
     <published>2020-12-25T19:32:00-07:00</published>
   
-    <updated>2020-12-25T19:32:00-07:00</updated>
+    <updated>2021-08-16T23:56:30-07:00</updated>
   
     <id>https://hfadeel.github.io//posts/road2/</id>
     <content src="https://hfadeel.github.io//posts/road2/" />
@@ -118,12 +117,10 @@ Supervised Machine learning relies on labels. Yet these labels provide limited s
 
 
 
-      Building the best Base sized Transformer model.
-
-TL;DR
+      TL;DR
 
   We present a new state-of-the-art base transformer model for machine reading comprehension that has almost 5% higher F1 score compared to ELECTRA-Base and 2% higher F1 score than the previous state-of-the-art base model (DeBERTa). This Model also outperforms BERT-Large.
-  We present more experiments on our new multi-task pre-training met...
+  We present more experiments on our new multi-task pre-training method and knowledge distillation which led to this ...
     </summary>
   
 
@@ -135,7 +132,7 @@ TL;DR
     <link href="https://hfadeel.github.io//posts/road1/" rel="alternate" type="text/html" title="ROaD-Electra Robustly Optimized and Distilled Electra 1" />
     <published>2020-10-10T19:32:00-07:00</published>
   
-    <updated>2020-10-10T19:32:00-07:00</updated>
+    <updated>2021-08-16T23:56:30-07:00</updated>
   
     <id>https://hfadeel.github.io//posts/road1/</id>
     <content src="https://hfadeel.github.io//posts/road1/" />
@@ -173,7 +170,7 @@ TL;DR
     <link href="https://hfadeel.github.io//posts/old_tricks/" rel="alternate" type="text/html" title="New Models and Old Tricks" />
     <published>2020-05-10T19:32:00-07:00</published>
   
-    <updated>2020-05-10T19:32:00-07:00</updated>
+    <updated>2021-08-16T23:56:30-07:00</updated>
   
     <id>https://hfadeel.github.io//posts/old_tricks/</id>
     <content src="https://hfadeel.github.io//posts/old_tricks/" />

@@ -12,11 +12,11 @@
 
 
 
-    "snippet": "How much Attention is really needed?1. IntroductionTransformer models (e.g. BERT, RoBERTa, ELECTRA) have revolutionized the natural language processing space. Since its introduction there have been many new state-of-the-art  results  in  MRC, NLI, NLU and machine translation. Yet Transformer mode..."
+    "snippet": "1. IntroductionTransformer models (e.g. BERT, RoBERTa, ELECTRA) have revolutionized the natural language processing space. Since its introduction there have been many new state-of-the-art  results  in  MRC, NLI, NLU and machine translation. Yet Transformer models are very computationally expensiv..."
   },
   
   {
-    "title": "Knowledge Distillation Part 1 - Large to Large - Can student exceed the teacher",
+    "title": "Knowledge Distillation Part 1",
     "url": "/posts/kd1/",
     "categories": "",
     "tags": "",
@@ -27,7 +27,7 @@
 
 
 
-    "snippet": "Part 1 - Large to Large : Can student exceed the teacher1. IntroductionKnowledge Distillation is the process of transferring knowledge from a model to another model, usually a smaller one.Supervised Machine learning relies on labels. Yet these labels provide limited signals. For example, in image..."
+    "snippet": "1. IntroductionKnowledge Distillation is the process of transferring knowledge from a model to another model, usually a smaller one.Supervised Machine learning relies on labels. Yet these labels provide limited signals. For example, in image recognition tasks, the labels are one-hot vectors with ..."
   },
   
   {
@@ -42,7 +42,7 @@
 
 
 
-    "snippet": "Building the best Base sized Transformer model.TL;DR  We present a new state-of-the-art base transformer model for machine reading comprehension that has almost 5% higher F1 score compared to ELECTRA-Base and 2% higher F1 score than the previous state-of-the-art base model (DeBERTa). This Model a..."
+    "snippet": "TL;DR  We present a new state-of-the-art base transformer model for machine reading comprehension that has almost 5% higher F1 score compared to ELECTRA-Base and 2% higher F1 score than the previous state-of-the-art base model (DeBERTa). This Model also outperforms BERT-Large.  We present more ex..."
   },
   
   {
