@@ -2,7 +2,7 @@
 title: What is understanding - AI Prospective
 author: Haytham ElFadeel
 date: 2019-05-10 18:32:00 -0800
-
+des: In 2013 I faced this question, I took a week off from my startup and thought about this question, <b>What is understanding?</b> Here is what I came up with...
 ---
 <sup>Originally written in 2014</sup>
 

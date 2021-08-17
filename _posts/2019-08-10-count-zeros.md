@@ -2,7 +2,7 @@
 title: Fast way to count zeros
 author: Haytham ElFadeel
 date: 2019-08-10 18:32:00 -0800
-
+des: Population count is a procedure of counting the number of ones in a bit string. It is used in many applications such as Hamming distance, cardinality count in Bitarray, Binary Neural Networks and many other applications.
 ---
 
 

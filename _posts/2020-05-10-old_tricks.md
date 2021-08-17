@@ -3,6 +3,7 @@ title: New Models and Old Tricks
 author: Haytham ElFadeel
 date: 2020-05-10 18:32:00 -0800
 toc: false
+des: It seems tricks (e.g. Data Augmentation, Label smoothing, Mixout) are approaching their limits to improve SoTA models on SQUAD 2.0 and NQA.
 ---
 
 It seems tricks (e.g. Data Augmentation, Label smoothing, Mixout) are approaching their limits to improve SoTA models on SQUAD 2.0 and NQA
