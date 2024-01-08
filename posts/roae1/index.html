@@ -935,7 +935,7 @@
       </mrow>
     </math>
   <p>
-  SwiGLU was introduced in 2020 [<a href="https://arxiv.org/pdf/2002.05202.pdf">https://arxiv.org/pdf/2002.05202.pdf</a>] and it’s known to consistently outperforms ReLU, GLU, and GELU, equally important the Swish family of functions (e.g. Swish, SwiGLU) are more stable and smoother, which lead to faster conversion, and potentially better generalization.
+  SwiGLU was introduced in 2020 paper GLU Variants Improve Transformer [<a href="https://arxiv.org/pdf/2002.05202.pdf">https://arxiv.org/pdf/2002.05202.pdf</a>] and it’s known to consistently outperforms ReLU, GLU, and GELU, equally important the Swish family of functions (e.g. Swish, SwiGLU) are more stable and smoother, which lead to faster conversion, and potentially better generalization.
   </p>
   <p>
 
@@ -1290,7 +1290,8 @@ To ensure fairness and apple-to-apple we didn’t not use any dataset that is cu
 
 
 <p>
-We trained a 5 models starting from the base model <strong>‘ROaE base - Mixtral 8x7B</strong>’, each model trained using randomly sampled 90% of the entire fine-tuning dataset, also using different shuffling seed. We then merge the models using Fisher-Weighted Averaging [<a href="https://arxiv.org/abs/2111.09832">https://arxiv.org/abs/2111.09832</a>]. Averaging the parameters of models that have the same architecture and initialization can provide a means of combining their respective capabilities. Fisher-Weight averaging have show to work slightly better any regular averaging [Model soup <a href="https://arxiv.org/pdf/2203.05482.pdf">https://arxiv.org/pdf/2203.05482.pdf</a>]. The merged model is our final model which we call <strong>‘ROaE DPO v2 - Mixtral 8x7B</strong>’.
+We trained a 5 models starting from the base model <strong>‘ROaE base - Mixtral 8x7B</strong>’, each model trained using randomly sampled 90% of the entire fine-tuning dataset, also using different shuffling seed. We then merge the models using Fisher-Weighted Averaging [<a href="https://arxiv.org/abs/2111.09832">https://arxiv.org/abs/2111.09832</a>]. Averaging the parameters of models that have the same architecture and initialization can provide a means of combining their respective capabilities. Fisher-Weight averaging have show to work slightly better any regular averaging [Model soup <a href="https://arxiv.org/pdf/2203.05482.pdf">https://arxiv.org/pdf/2203.05482.pdf</a>].
+<br/> The merged model is our final model which we call <strong>‘ROaE DPO v2 - Mixtral 8x7B</strong>’.
 </p>
 <h1><strong>6. Results</strong></h1>
 <img style="max-width:200%" src="/assets/img/blog/roae1_8.png"/>
