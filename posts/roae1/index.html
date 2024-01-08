@@ -723,12 +723,15 @@
 
         
 
-        <h2 id="tldr"><strong>TL;DR</strong></h2>
+<h1 id="tldr"><strong>TL;DR</strong></h1>
+<p>
 <ul>
-  <li>We present a new state-of-the-art base LLM model that reduce the gap to GPT-4, by leveraging and focusing on high-quality data, diverse datasets and objectives, and factual finetuning.</li>
+  <li>We present a new State-of-The-Art LLM model that reduce the gap to GPT-4, by leveraging and focusing on high-quality data, diverse datasets and objectives, and factual finetuning.</li>
+  <li>We investigate the impact of high-quality data, diverse datasets and objectives, and factual finetuning on LLM.</li>
 </ul>
+</p>
 
-<h2 id="1-introduction"><strong>1. Introduction</strong></h2>
+<h1 id="1-introduction"><strong>1. Introduction</strong></h1>
 <p>
   This project (still in-progress but with impressive results so far) aims to explore the limits of existing LLM performance and enhance existing LLM but not by focusing on the scale (i.e. model size, computation, number of tokens used in training), instead by focusing on data quality and training objectives. The key insights / hypothesis for this work are two folds:
   </p>
@@ -740,21 +743,21 @@
   </li>
   </ol>
   <p>
-  The starting point (i.e. baseline) is going to be the Mixtral 8x7B model. In section 1, we will recap the basics of the model. In section 2 we will describe our pre-training approach, section 3 will cover our fine-tuning approach that focuses on factuality, section 4 will cover our multi-task fine-tuning approach and our final model, finally section 5 will cover the results.
+  The starting point (i.e. baseline) is going to be the Mixtral 8x7B model. In section 1, we will recap the basics of the model. In section 3 we will describe our pre-training approach, section 4 will cover our fine-tuning approach that focuses on factuality, section 5 will cover our multi-task fine-tuning approach and our final model, finally section 6 will cover the results.
   </p>
 
 
-<h2><strong>1. Recap the basics of Mistral and similar modern LLMs</strong></h2>
+<h1><strong>2. Recap the basics of Mistral and similar modern LLMs</strong></h1>
 <p>
   To start I will explain the difference between modern LLM (e.g. Mistral and Llama) and the original Transformer models.
   </p>
-  <h2><strong>Training Differences:</strong></h2>
+  <h2><strong>Training Differences</strong></h2>
   
   
   <p>
   Mistral didn’t release much information about how the model was trained. So we will just skip this part. My best guess is Mistral followed Llama recipe but with tuning such as: better pre-processing of the data, better data filtration for diversification, deduplication, bias, and quality, and more recent dataset, etc.
   </p>
-  <h2><strong>Architecture Differences:</strong></h2>
+  <h2><strong>Architecture Differences</strong></h2>
   
   
   <p>
@@ -1079,6 +1082,7 @@ The Mixtral 8x7b design follows the Switch Transformer [<a href="https://arxiv.o
 From <a href="https://github.com/mistralai/mistral-src/tree/main?tab=readme-ov-file#sparse-mixture-of-experts-smoe">https://github.com/mistralai/mistral-src/tree/main?tab=readme-ov-file#sparse-mixture-of-experts-smoe</a>
 </p>
 
+<h1><strong>3. Pretraining</strong></h1>
 <h2><strong>Preliminaries</strong></h2>
 
 
@@ -1182,13 +1186,13 @@ We sampled a subset of the tuples, merged them by the subject, and filtered them
 <li>Kept: 		PersonX borrows money	xEffect	becomes in debt
 </li>
 </ul>
-<h3><strong>Training Details</strong></h3>
+<h2><strong>Training Details</strong></h2>
 
 
 <p>
 The training data was roughly 10B tokens and we trained Mixtral 8x7B on 8 x H100 GPUs for several days. We call this model <strong>‘ROaE base v1 - Mixtral 8x7B</strong>’ (<strong>R</strong>obustly <strong>O</strong>ptimized and <strong>E</strong>nhanced). This model did not undergone alignment through reinforcement learning from human feedback (RLHF), nor has it been instruct fine-tuned.
 </p>
-<h1><strong>3. Fine-tuning model [v1]</strong></h1>
+<h1><strong>4. Fine-tuning model [v1]</strong></h1>
 
 
 <p>
@@ -1214,14 +1218,14 @@ For our fine-tuning we’re using two datasets:
 <p>
 We rank responses based on factuality, for questions where we expected a short answer (single fact) (e.g. where was personX born) we use the correct answer + heuristic to rank the responses, our heuristic rank concise answer higher. For open-ended questions (e.g. summarization, write bio) we using FactScore [<a href="https://arxiv.org/pdf/2305.14251.pdf">https://arxiv.org/pdf/2305.14251.pdf</a>] which leverage GPT-3.5 to extract the atomic claims from the model responses, then we used a small model (e.g. Mistral 7B) along with the source page to estimate the truthfulness [in follow up work, we plan drop the dependencies on external LLMs]. We call this model <strong>‘ROaE DPO v1- Mixtral 8x7B</strong>’.
 </p>
-<h1><strong>4. Fine-tuning model [v2]</strong></h1>
+<h1><strong>5. Fine-tuning model [v2]</strong></h1>
 
 
 <p>
 Given that we’re trying to push the model performance to the limit and Peter Norvig famous quote “<strong><em>More data beats clever algorithms, but better data beats more data</em></strong>” and knowing that proprietary models like GPT-4, Claude, and others don’t constrain themself with a specific publicly available datasets nor they publish the dataset used for their alignment process. We came up with alternative fine-tuning approach that leverage more objective diversity, and increase the training data size significantly. 
 </p>
 <p>
-<strong>Training data:</strong>
+<h2><strong>Training data:</strong></h2>
 </p>
 <p>
 We first increase the size and diversity of the syntactic question answering dataset we created from Wikipedia, then we sampled a subset of the following publicly available dataset:
@@ -1289,7 +1293,7 @@ To ensure fairness and apple-to-apple we didn’t not use any dataset that is cu
 <p>
 We trained a 5 models starting from the base model <strong>‘ROaE base - Mixtral 8x7B</strong>’, each model trained using randomly sampled 90% of the entire fine-tuning dataset, also using different shuffling seed. We then merge the models using Fisher-Weighted Averaging [<a href="https://arxiv.org/abs/2111.09832">https://arxiv.org/abs/2111.09832</a>]. Averaging the parameters of models that have the same architecture and initialization can provide a means of combining their respective capabilities. Fisher-Weight averaging have show to work slightly better any regular averaging [Model soup <a href="https://arxiv.org/pdf/2203.05482.pdf">https://arxiv.org/pdf/2203.05482.pdf</a>]. The merged model is our final model which we call <strong>‘ROaE DPO v2 - Mixtral 8x7B</strong>’.
 </p>
-<h1><strong>5. Results</strong></h1>
+<h1><strong>6. Results</strong></h1>
 <img src="/assets/img/blog/roae1_8.png"/>
 
 <p><img data-proofer-ignore data-src="/assets/img/blog/road2_7.png" alt="desktopview" /></p>
