@@ -1294,7 +1294,7 @@ To ensure fairness and apple-to-apple we didn’t not use any dataset that is cu
 We trained a 5 models starting from the base model <strong>‘ROaE base - Mixtral 8x7B</strong>’, each model trained using randomly sampled 90% of the entire fine-tuning dataset, also using different shuffling seed. We then merge the models using Fisher-Weighted Averaging [<a href="https://arxiv.org/abs/2111.09832">https://arxiv.org/abs/2111.09832</a>]. Averaging the parameters of models that have the same architecture and initialization can provide a means of combining their respective capabilities. Fisher-Weight averaging have show to work slightly better any regular averaging [Model soup <a href="https://arxiv.org/pdf/2203.05482.pdf">https://arxiv.org/pdf/2203.05482.pdf</a>]. The merged model is our final model which we call <strong>‘ROaE DPO v2 - Mixtral 8x7B</strong>’.
 </p>
 <h1><strong>6. Results</strong></h1>
-<img max-width="200%" src="/assets/img/blog/roae1_8.png"/>
+<img style="max-width:200%" src="/assets/img/blog/roae1_8.png"/>
 
 
 
