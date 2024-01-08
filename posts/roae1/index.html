@@ -755,7 +755,7 @@
   
   
   <p>
-  Mistral didn’t release much information about how the model was trained. So we will just skip this part. My best guess is Mistral followed Llama recipe but with tuning such as: better pre-processing of the data, better data filtration for diversification, deduplication, bias, and quality, and more recent dataset, etc.
+  Mistral didn't release much information about how the model was trained. So we will just skip this part. My best guess is Mistral followed Llama recipe but with tuning such as: better pre-processing of the data, better data filtration for diversification, deduplication, bias, and quality, and more recent dataset, etc.
   </p>
   <h2><strong>Architecture Differences</strong></h2>
   
@@ -935,7 +935,7 @@
       </mrow>
     </math>
   <p>
-  SwiGLU was introduced in 2020 paper GLU Variants Improve Transformer [<a href="https://arxiv.org/pdf/2002.05202.pdf">https://arxiv.org/pdf/2002.05202.pdf</a>] and it’s known to consistently outperforms ReLU, GLU, and GELU, equally important the Swish family of functions (e.g. Swish, SwiGLU) are more stable and smoother, which lead to faster conversion, and potentially better generalization.
+  SwiGLU was introduced in 2020 paper GLU Variants Improve Transformer [<a href="https://arxiv.org/pdf/2002.05202.pdf">https://arxiv.org/pdf/2002.05202.pdf</a>] and it's known to consistently outperforms ReLU, GLU, and GELU, equally important the Swish family of functions (e.g. Swish, SwiGLU) are more stable and smoother, which lead to faster conversion, and potentially better generalization.
   </p>
   <p>
 
@@ -945,7 +945,7 @@
     </p>
   <h3><strong>FFN with Inverted bottleneck</strong></h3>
   <p>
-    Both Mistral and LLAMA have FFN blocks with 3 weight matrices, as opposed to two for the original Transformer. That’s because the SwiGLU contains 3 matrices (W1, W2, W3). This doesn’t change the computation or the total number of parameters meaningfully, as the number of hidden units dff (the second dimension of W1 and W2 and the first dimension of W3) by a factor of ⅔ when comparing these layers to the original two-matrix version.
+    Both Mistral and LLAMA have FFN blocks with 3 weight matrices, as opposed to two for the original Transformer. That's because the SwiGLU contains 3 matrices (W1, W2, W3). This doesn't change the computation or the total number of parameters meaningfully, as the number of hidden units dff (the second dimension of W1 and W2 and the first dimension of W3) by a factor of ⅔ when comparing these layers to the original two-matrix version.
   </p>
   <h3><strong>RMSNorm</strong></h3>
   <p>
@@ -966,7 +966,7 @@
       </p>
       <h3><strong>Grouped-Query Attention</strong></h3>
       <p>
-        Multi-head attention (MHA) while achieved impressive results, it’s very expensive computationally, specially for long context which is typical for modern LLM. multi-query attention (MQA) is a mechanism that uses only a single key-value head for multiple queries, which can save memory and greatly speed up decoder inference. However, MQA can lead to quality degradation. Grouped Query Attention (GQA) [<a href="https://arxiv.org/pdf/2305.13245.pdf">https://arxiv.org/pdf/2305.13245.pdf</a>] is a method that sit between multi-query attention (MQA) and multi-head attention (MHA). It aims to achieve the quality of MHA while maintaining the speed of MQA.
+        Multi-head attention (MHA) while achieved impressive results, it's very expensive computationally, specially for long context which is typical for modern LLM. multi-query attention (MQA) is a mechanism that uses only a single key-value head for multiple queries, which can save memory and greatly speed up decoder inference. However, MQA can lead to quality degradation. Grouped Query Attention (GQA) [<a href="https://arxiv.org/pdf/2305.13245.pdf">https://arxiv.org/pdf/2305.13245.pdf</a>] is a method that sit between multi-query attention (MQA) and multi-head attention (MHA). It aims to achieve the quality of MHA while maintaining the speed of MQA.
       </p>
       <p>
         Grouped-query attention divides query heads into G groups, each of which shares a single key head and value head. GQA-G refers to grouped-query with G groups. GQA-1, with a single group and therefore single key and value head, is equivalent to MQA, while GQA-H, with groups equal to number of heads, is equivalent to MHA.
@@ -978,7 +978,7 @@
 
       <h3><strong>Sliding Window Attention (SWA)</strong></h3>
       <p>
-        Llama doesn’t employ SAW, only Mistral. The sliding window attention reduces computation and memory need for LLM by making each layer attend to the previous N tokens (e.g. 4,096), instead of all the previous tokens. Given the stacked nature of the Transformer attention architecture, the sliding window still can attend to the tokens that are far beyond the N (e.g. 4,096).  A token 
+        Llama doesn't employ SAW, only Mistral. The sliding window attention reduces computation and memory need for LLM by making each layer attend to the previous N tokens (e.g. 4,096), instead of all the previous tokens. Given the stacked nature of the Transformer attention architecture, the sliding window still can attend to the tokens that are far beyond the N (e.g. 4,096).  A token 
         <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML">
           <mi>i</mi>
         </math>
@@ -1126,7 +1126,7 @@ Plus a selected number of web-pages referenced from mentioned websites. A specia
 </p>
 <ul>
 
-<li>The boundaries between pages was respected so the model doesn’t take input from two unrelated pages in one sample.
+<li>The boundaries between pages was respected so the model doesn't take input from two unrelated pages in one sample.
 
 <li>Tables, info-boxes, Math LaTeX, and image captions was processed.
 </li>
@@ -1187,13 +1187,13 @@ We sampled a subset of the tuples, merged them by the subject, and filtered them
 
 
 <p>
-The training data was roughly 10B tokens and we trained Mixtral 8x7B on 8 x H100 GPUs for several days. We call this model <strong>‘ROaE base v1 - Mixtral 8x7B</strong>’ (<strong>R</strong>obustly <strong>O</strong>ptimized and <strong>E</strong>nhanced). This model did not undergone alignment through reinforcement learning from human feedback (RLHF), nor has it been instruct fine-tuned.
+The training data was roughly 10B tokens and we trained Mixtral 8x7B on 8 x H100 GPUs for several days. We call this model <strong>'ROaE base v1 - Mixtral 8x7B'</strong> (<strong>R</strong>obustly <strong>O</strong>ptimized and <strong>E</strong>nhanced). This model did not undergone alignment through reinforcement learning from human feedback (RLHF), nor has it been instruct fine-tuned.
 </p>
 <h1><strong>4. Fine-tuning model [v1]</strong></h1>
 
 
 <p>
-Our objective with fine-tuning the model is to improve factuality, reduce hallucination, and show the generalization capabilities of our model. Our approach is largely inspired by Fine-tuning Language Models for Factuality [<a href="https://arxiv.org/pdf/2311.08401.pdf">https://arxiv.org/pdf/2311.08401.pdf</a>]. We’re leveraging two key recent innovations:
+Our objective with fine-tuning the model is to improve factuality, reduce hallucination, and show the generalization capabilities of our model. Our approach is largely inspired by Fine-tuning Language Models for Factuality [<a href="https://arxiv.org/pdf/2311.08401.pdf">https://arxiv.org/pdf/2311.08401.pdf</a>]. We're leveraging two key recent innovations:
 </p>
 <ol>
 
@@ -1203,7 +1203,7 @@ Our objective with fine-tuning the model is to improve factuality, reduce halluc
 </li>
 </ol>
 <p>
-For our fine-tuning we’re using two datasets:
+For our fine-tuning we're using two datasets:
 </p>
 <ol>
 
@@ -1213,13 +1213,13 @@ For our fine-tuning we’re using two datasets:
 </li>
 </ol>
 <p>
-We rank responses based on factuality, for questions where we expected a short answer (single fact) (e.g. where was personX born) we use the correct answer + heuristic to rank the responses, our heuristic rank concise answer higher. For open-ended questions (e.g. summarization, write bio) we using FactScore [<a href="https://arxiv.org/pdf/2305.14251.pdf">https://arxiv.org/pdf/2305.14251.pdf</a>] which leverage GPT-3.5 to extract the atomic claims from the model responses, then we used a small model (e.g. Mistral 7B) along with the source page to estimate the truthfulness [in follow up work, we plan drop the dependencies on external LLMs]. We call this model <strong>‘ROaE DPO v1- Mixtral 8x7B</strong>’.
+We rank responses based on factuality, for questions where we expected a short answer (single fact) (e.g. where was personX born) we use the correct answer + heuristic to rank the responses, our heuristic rank concise answer higher. For open-ended questions (e.g. summarization, write bio) we using FactScore [<a href="https://arxiv.org/pdf/2305.14251.pdf">https://arxiv.org/pdf/2305.14251.pdf</a>] which leverage GPT-3.5 to extract the atomic claims from the model responses, then we used a small model (e.g. Mistral 7B) along with the source page to estimate the truthfulness [in follow up work, we plan drop the dependencies on external LLMs]. We call this model <strong>'ROaE DPO v1- Mixtral 8x7B'</strong>.
 </p>
 <h1><strong>5. Fine-tuning model [v2]</strong></h1>
 
 
 <p>
-Given that we’re trying to push the model performance to the limit and Peter Norvig famous quote “<strong><em>More data beats clever algorithms, but better data beats more data</em></strong>” and knowing that proprietary models like GPT-4, Claude, and others don’t constrain themself with a specific publicly available datasets nor they publish the dataset used for their alignment process. We came up with alternative fine-tuning approach that leverage more objective diversity, and increase the training data size significantly. 
+Given that we're trying to push the model performance to the limit and Peter Norvig famous quote “<strong><em>More data beats clever algorithms, but better data beats more data</em></strong>” and knowing that proprietary models like GPT-4, Claude, and others don't constrain themself with a specific publicly available datasets nor they publish the dataset used for their alignment process. We came up with alternative fine-tuning approach that leverage more objective diversity, and increase the training data size significantly. 
 </p>
 <p>
 <h2><strong>Training data:</strong></h2>
@@ -1281,14 +1281,14 @@ A Question Answering Challenge Targeting Commonsense Knowledge with about 9K tra
 </li>
 </ul>
 <p>
-To ensure fairness and apple-to-apple we didn’t not use any dataset that is currently widely used to evaluate the performance of LLMs (e.g. ARC, Natural QUestions, TriviaQA, MMLU, HellaSwag, WinoGrande, GSM8K).
+To ensure fairness and apple-to-apple we didn't not use any dataset that is currently widely used to evaluate the performance of LLMs (e.g. ARC, Natural QUestions, TriviaQA, MMLU, HellaSwag, WinoGrande, GSM8K).
 </p>
 <h2><strong>Training Details</strong></h2>
 
 
 <p>
-We trained a 5 models starting from the base model <strong>‘ROaE base - Mixtral 8x7B</strong>’, each model trained using randomly sampled 90% of the entire fine-tuning dataset, also using different shuffling seed. We then merge the models using Fisher-Weighted Averaging [<a href="https://arxiv.org/abs/2111.09832">https://arxiv.org/abs/2111.09832</a>]. Averaging the parameters of models that have the same architecture and initialization can provide a means of combining their respective capabilities. Fisher-Weight averaging have show to work slightly better any regular averaging [Model soup <a href="https://arxiv.org/pdf/2203.05482.pdf">https://arxiv.org/pdf/2203.05482.pdf</a>].
-<br/> The merged model is our final model which we call <strong>‘ROaE DPO v2 - Mixtral 8x7B</strong>’.
+We trained a 5 models starting from the base model <strong>'ROaE base - Mixtral 8x7B'</strong>, each model trained using randomly sampled 90% of the entire fine-tuning dataset, also using different shuffling seed. We then merge the models using Fisher-Weighted Averaging [<a href="https://arxiv.org/abs/2111.09832">https://arxiv.org/abs/2111.09832</a>]. Averaging the parameters of models that have the same architecture and initialization can provide a means of combining their respective capabilities. Fisher-Weight averaging have show to work slightly better any regular averaging [Model soup <a href="https://arxiv.org/pdf/2203.05482.pdf">https://arxiv.org/pdf/2203.05482.pdf</a>].
+<br/> The merged model is our final model which we call <strong>'ROaE DPO v2 - Mixtral 8x7B'</strong>.
 </p>
 <h1><strong>6. Results</strong></h1>
 <img style="max-width:200%" src="/assets/img/blog/roae1_8.png"/>
