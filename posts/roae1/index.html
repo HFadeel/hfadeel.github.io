@@ -1100,13 +1100,13 @@ We start by resuming the pretraining process of the baseline model, which is Mix
 
 
 <p>
-Our pre-training data is a mixture of synthetically generated data specifically created to teach the model commonsense reasoning and general knowledge, including science, cause and effect, and daily activities, among others and a selected web data that is carefully processed to ensure high quality.
+Our pre-training data is a mixture of synthetically generated data specifically created to teach the model commonsense reasoning and general knowledge, including science, cause and effect, and daily activities, among others and a selected web data that is carefully processed to ensure high quality, factuality, and recency.
 </p>
 <h3><strong>Web data</strong></h3>
 
 
 <p>
-The web portion of our pre training dataset are from the following websites:
+The web portion of our pre-training dataset are from the following websites:
 </p>
 <ul>
 
@@ -1128,7 +1128,7 @@ Plus a selected number of web-pages referenced from mentioned websites. A specia
 
 <li>The boundaries between pages was respected so the model doesn't take input from two unrelated pages in one sample.
 
-<li>Tables, info-boxes, Math LaTeX, and image captions was processed.
+<li>Tables, info-boxes, Math LaTeX, and image captions was processed to be useful.
 </li>
 </ul>
 <h3><strong>Syntactic data</strong></h3>
@@ -1189,11 +1189,11 @@ We sampled a subset of the tuples, merged them by the subject, and filtered them
 <p>
 The training data was roughly 10B tokens and we trained Mixtral 8x7B on 8 x H100 GPUs for several days. We call this model <strong>'ROaE base v1 - Mixtral 8x7B'</strong> (<strong>R</strong>obustly <strong>O</strong>ptimized and <strong>E</strong>nhanced). This model did not undergone alignment through reinforcement learning from human feedback (RLHF), nor has it been instruct fine-tuned.
 </p>
-<h1><strong>4. Fine-tuning model [v1]</strong></h1>
+<h1><strong>4. Fine-tuning model : Factuality [v1]</strong></h1>
 
 
 <p>
-Our objective with fine-tuning the model is to improve factuality, reduce hallucination, and show the generalization capabilities of our model. Our approach is largely inspired by Fine-tuning Language Models for Factuality [<a href="https://arxiv.org/pdf/2311.08401.pdf">https://arxiv.org/pdf/2311.08401.pdf</a>]. We're leveraging two key recent innovations:
+Our objective with fine-tuning the model is to improve factuality, reduce hallucination, and show the generalization capabilities of our model. Our approach is largely inspired by "Fine-tuning Language Models for Factuality" [<a href="https://arxiv.org/pdf/2311.08401.pdf">https://arxiv.org/pdf/2311.08401.pdf</a>]. We're leveraging two key recent innovations:
 </p>
 <ol>
 
@@ -1215,7 +1215,7 @@ For our fine-tuning we're using two datasets:
 <p>
 We rank responses based on factuality, for questions where we expected a short answer (single fact) (e.g. where was personX born) we use the correct answer + heuristic to rank the responses, our heuristic rank concise answer higher. For open-ended questions (e.g. summarization, write bio) we using FactScore [<a href="https://arxiv.org/pdf/2305.14251.pdf">https://arxiv.org/pdf/2305.14251.pdf</a>] which leverage GPT-3.5 to extract the atomic claims from the model responses, then we used a small model (e.g. Mistral 7B) along with the source page to estimate the truthfulness [in follow up work, we plan drop the dependencies on external LLMs]. We call this model <strong>'ROaE DPO v1- Mixtral 8x7B'</strong>.
 </p>
-<h1><strong>5. Fine-tuning model [v2]</strong></h1>
+<h1><strong>5. Fine-tuning model : Multi-task learning [v2]</strong></h1>
 
 
 <p>
