@@ -1067,7 +1067,7 @@ Only Mixtral 8x7B applies Mixture of experts. One way to think about the FFN and
 MoE allows us to build sparse models and decouple the model capacity (number of parameters) from the compute requirements, by only activating a subset of weights (experts) based on gating mechanisms. While MoE allows us to increase the model capacity without incurring the computation significantly, it still requires the same amount of memory bandwidth for large batch size. Memory bandwidth is currently the biggest bottleneck for training and inference of LLMs.
 </p>
 <p>
-The Mixtral 8x7b design follows the Switch Transformer [<a href="https://arxiv.org/pdf/2101.03961.pdf">https://arxiv.org/pdf/2101.03961.pdf</a>]. It implements 8 experts in the FFN, and each token is routed to top-k experts.
+The Mixtral 8x7b design follows the Switch Transformer [<a href="https://arxiv.org/pdf/2101.03961.pdf">https://arxiv.org/pdf/2101.03961.pdf</a>]. It implements 8 experts in the FFN, and each token is routed to top-k (k = 2 in the Mixtral 8x7B) experts.
 </p>
 <p>
 
