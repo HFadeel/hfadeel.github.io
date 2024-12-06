@@ -731,7 +731,8 @@ This article explores: The scaling law, Advancement in Technology, and Human Nat
 
 <h1 id="1-part"><strong>Part 1 - Is it really slowing and if so why…</strong></h1>
 <p>
-  Advancement in math, reasoning, language, and the Chat Arena have indeed been slightly slower in 2024 compared to the rapid strides of 2023 and 2022. However, while these areas have slowed slightly, we’ve witnessed the release of multimodal models like GPT-4o and LLAMA 3.2.
+  Advancement in math, reasoning, language, and the Chat Arena benchmark have indeed been slightly slower in 2024 compared to the rapid progress of 2023 and 2022. However, while these areas have slowed slightly, we’ve witnessed the release of multimodal models like GPT-4o and LLAMA 3.2.
+  <br/>
   The bottom line is, this slowdown is natural. As benchmarks are saturated — when high accuracy or near-complete solutions are achieved — engineers naturally shift focus to new frontiers, such as vision, audio, and multi-step reasoning, instead of solely refining existing capabilities. 
 </p>
 <p>
@@ -743,11 +744,11 @@ Human nature and the scaling laws…
   Some argue that scaling laws are slowing or even breaking. This is not true—at least, not yet.
   <br/>
   Interestingly, this narrative echoes similar "doom and gloom" predictions in other fields. Take Moore’s Law, which predicts that the number of transistors on integrated circuits doubles roughly every two years. 
-  Critics have predicted its demise for over 20 years, yet Moore's Law remains alive, supported by robust roadmaps from industry leaders like IMEC, TSMC, and Intel [<a href="https://www.imec-int.com/en/articles/smaller-better-faster-imec-presents-chip-scaling-roadmap">ref</a>]. As Peter Lee, Microsoft Research VP, once joked: "The number of people predicting the death of Moore’s Law doubles every two years.".
+  Critics have predicted its demise for over 20 years, yet Moore's Law remains alive, supported by robust roadmaps from industry leaders like IMEC, TSMC, and Intel [<a href="https://www.imec-int.com/en/articles/smaller-better-faster-imec-presents-chip-scaling-roadmap">ref</a>]. As Peter Lee, Microsoft Research VP, once joked: "The number of people predicting the death of Moore’s Law doubles every two years".
   <br/>
   This phenomenon isn’t unique to technology. The U.S. Bureau of Mines in 1919 and M. King Hubbert in 1956 predicted that we will run out of Oil soon. Thomas Malthus in 1798 and Paul Ehrlich in 1968 predicted that we will run out of food "The battle to feed all of humanity is over. In the 1970s hundreds of millions of people will starve to death in spite of any crash programs embarked upon now". 
 <br/>  
-What all those predictions missed is <b>human ingenuity</b>, our ability to think creatively, and to innovate and find solutions.
+What all those predictions missed is <b>human ingenuity</b>, our ability to think creatively, to innovate and find solutions.
 </p>
 <p>
   <strong>
@@ -757,8 +758,8 @@ What all those predictions missed is <b>human ingenuity</b>, our ability to thin
   <p>
     <img style="width:900px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/sl_1.png"/>
     <br/>
-    The scaling law [<a href="https://arxiv.org/pdf/2010.14701">ref</a>] predicts a ~20% reduction in loss for every order-of-magnitude increase in compute (i.e. increase of compute here means a combination of model size, amount of training data, training time/compute). It’s important to remember, the scaling law doesn’t guarantee uniform improvements across all downstream tasks. 
-To put that in perspective, if we make the simplistic assumption it translates directly for a given benchmark with 80% accuracy, with the order of magnitude increase of compute the new score will be 84%.
+    The scaling law [<a href="https://arxiv.org/pdf/2010.14701">ref</a>] predicts a ~20% reduction in loss for every order-of-magnitude increase in compute (i.e. increase in compute here means a combination of model size, amount of training data, training time/compute). It’s important to remember, the scaling law doesn’t guarantee uniform improvements across all downstream tasks. 
+To put that in perspective, if we make the simplistic assumption it translates directly for a given benchmark with 80% accuracy, with the order of magnitude increase of compute the new accuracy will be 84%.
 
     <br/>
     Scaling also faces practical challenges, Software moves much faster than Hardware. While Nvidia's latest GPUs (Blackwell) offer 3x-6x performance improvements over their predecessors (Hopper), training larger models is hard and constrained by hardware, power, and economics. This has spurred innovation in areas like parallelism (to maximize the cluster utilization and efficiency), reward optimization (RLHF, DPO), synthetic training data (to maximize training signal and compute), and inference-time techniques like (Chain of Thought - CoT, Tree of Thought - ToT, and Reflection),
@@ -768,7 +769,7 @@ To put that in perspective, if we make the simplistic assumption it translates d
   <p>
   Advancement in technology doesn’t follow a linear trajectory. It follows two laws: the law of diminishing return and law of accelerated return.
 <br/>
-The law of diminishing return predicts that progress is characterized by an S-curve with a long gestation period, followed by rapid accelerating progress, then finally an extended period of incremental progress along a diminishing return curve.
+<b>The law of diminishing return</b> predicts that progress is characterized by an S-curve with a long gestation period, followed by rapid accelerating progress, then finally an extended period of incremental progress along a diminishing return curve.
 <br/>
 <img style="width:400px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/sl_2.png"/>
     <br/>
@@ -780,22 +781,22 @@ Stacked S-curves can be seen throughout history:
 <br/>
 Machine Learning:
 <ul>
-  <li>1980s	K-Nearest Neighbors, Rule-based, Backpropagation algorithm</li>
-  <li>1990s	Decision Tree, Boostomg, SVM</li>
-  <li>2000s	Kernel SVM, LSTM, Random Forest</li>
-  <li>2010s	Neural Network & CNN, AE/VAE, Pre-training and Deep Learning</li>
-  <li>2020s	Web scale Deep Learning, Transformers, Diffusion</li>
-</ul>>
+  <li>1980s	&nbsp;&nbsp;K-Nearest Neighbors, Rule-based, Backpropagation algorithm</li>
+  <li>1990s	&nbsp;&nbsp;Decision Tree, Boostomg, SVM</li>
+  <li>2000s	&nbsp;&nbsp;Kernel SVM, LSTM, Random Forest</li>
+  <li>2010s	&nbsp;&nbsp;Neural Network & CNN, AE/VAE, Pre-training and Deep Learning</li>
+  <li>2020s	&nbsp;&nbsp;Web scale Deep Learning, Transformers, Diffusion</li>
+</ul>
 Phones:
 <ul>
-  <li>1920s	Rotary phones</li>
-  <li>1960s	Dial Pad Phones</li>
-  <li>1970s	Cordless phones</li>
-  <li>1980s	Cell phones</li>
-  <li>1990s	Texting</li>
-  <li>2000s	Smartphones: Internet, Apps, Cameras, etc.</li>
-  <li>2010s	Widespread Adoption of Smartphone, Better Smartphones (e.g. faster connectivity, Video Camera, More sensors)</li>
-</ul>>
+  <li>1920s	&nbsp;&nbsp;Rotary phones</li>
+  <li>1960s	&nbsp;&nbsp;Dial Pad Phones</li>
+  <li>1970s	&nbsp;&nbsp;Cordless phones</li>
+  <li>1980s	&nbsp;&nbsp;Cell phones</li>
+  <li>1990s	&nbsp;&nbsp;Texting</li>
+  <li>2000s	&nbsp;&nbsp;Smartphones: Internet, Apps, Cameras, etc.</li>
+  <li>2010s	&nbsp;&nbsp;Better Smartphones: Faster connectivity, Video Camera, More sensors.</li>
+</ul>
 The challenge for leaders and innovators is predicting when to invest and jump to the next technology/idea and how to differentiate between a winning technology and dead-end technology.
   </p>
   <h1 id="3-part"><strong>Part 3 - What’s Next for Language Models</strong></h1>
