@@ -803,7 +803,7 @@ This article explores the problems and limitations of tokenization, and delves i
   MegaByte [<a href="https://arxiv.org/pdf/2305.07185">paper</a>]
 </h4>
 <p>
-  <img style="width:800px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_1.png"/>
+  <img style="width:700px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_1.png"/>
   MegaByte proposes modeling bytes instead of tokens, they use multiscale Transformer, specifically, MegaByte groups bytes into patches of fixed size P (P is typically 4 or 8). Each patch of bytes is vectorized and then fed into a “global” Transformer model. The output of the global model is then fed into a “local” Transformer model that autoregressively outputs byte-level logits.
 </p>
 
