@@ -17,8 +17,59 @@
   <icon>/assets/img/favicons/favicon.ico</icon>
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
-
+<entry>
+    <title>Towards Tokenization-Free Language Models: Research Trends</title>
+    <link href="https://hfadeel.github.io/posts/tok/" rel="alternate" type="text/html" title="Towards Tokenization-Free Language Models: Research Trends" />
+    <published>2024-12-20T19:32:00-07:00</published>
   
+    <updated>2024-12-20T23:56:30-07:00</updated>
+  
+    <id>https://hfadeel.github.io/posts/tok/</id>
+    <content src="https://hfadeel.github.io/posts/tok/" />
+    <author>
+      <name>Haytham ElFadeel</name>
+    </author>
+    <summary>
+    Tokenization is useful because it significantly decreases the inference and training costs. However, tokenization has several disadvantages: vulnerability to adversarial attacks, worse performance for number and character, biases, and additional complexity.
+This article explores the problems and limitations of tokenization, and delves into emerging research on tokenization-free approaches.
+    </summary>
+    </entry>
+
+  <entry>
+    <title>So the scaling law is slowing… So what…</title>
+    <link href="https://hfadeel.github.io/posts/sl/" rel="alternate" type="text/html" title="So the scaling law is slowing… So what…" />
+    <published>2024-12-05T19:32:00-07:00</published>
+  
+    <updated>2024-12-05T23:56:30-07:00</updated>
+  
+    <id>https://hfadeel.github.io/posts/sl/</id>
+    <content src="https://hfadeel.github.io/posts/sl/" />
+    <author>
+      <name>Haytham ElFadeel</name>
+    </author>
+    <summary>
+    Recent discussions suggest that Scaling Laws in AI might be slowing. But does this mean innovation is hitting a ceiling?
+    This article explores the scaling law, laws governing advancement in technology, and human nature…
+    </summary>
+    </entry>
+
+  <entry>
+    <title>Enhancing LLM with high-quality, diverse dataset, and factuality</title>
+    <link href="https://hfadeel.github.io/posts/roae1/" rel="alternate" type="text/html" title="Enhancing LLM with high-quality, diverse dataset, and factuality" />
+    <published>2024-01-07T19:32:00-07:00</published>
+  
+    <updated>2024-01-08T23:56:30-07:00</updated>
+  
+    <id>https://hfadeel.github.io/posts/roae1/</id>
+    <content src="https://hfadeel.github.io/posts/roae1/" />
+    <author>
+      <name>Haytham ElFadeel</name>
+    </author>
+    <summary>
+    Can we close the gap to GPT-4 with a smaller model? A SoTA LLM at home powered by high-quality data, diverse dataset and objective, and fine-tuned for factuality.
+    </summary>
+    </entry>
+
   <entry>
     <title>Decoupled Transformer</title>
     <link href="https://hfadeel.github.io//posts/dc/" rel="alternate" type="text/html" title="Decoupled Transformer" />
@@ -31,29 +82,13 @@
     <author>
       <name>Haytham ElFadeel</name>
     </author>
-
-  
-    
-  
-
-  
     <summary>
-      
-
-
-
-
-
       1. Introduction
 
 Transformer models (e.g. BERT, RoBERTa, ELECTRA) have revolutionized the natural language processing space. Since its introduction there have been many new state-of-the-art  results  in  MRC, NLI, NLU and machine translation. Yet Transformer models are very computationally expensive. There are three major factors that make Transformers models (encoders) expensive:
-
-
   The size ...
     </summary>
-  
-
-  </entry>
+    </entry>
 
   
   <entry>
