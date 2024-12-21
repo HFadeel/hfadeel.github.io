@@ -749,7 +749,7 @@ This article explores the problems and limitations of tokenization, and delves i
 </h4>
 <p>
   Tokenization is one of the main reasons why LLMs perform poorly at simple spelling, character, and number manipulation tasks. This is because tokenization lacks understanding of word constituents. For example, tokenization-based LlAMA 3 scores 27% in CUTE (simple character manipulation tasks), while scoring 79% in HellaSwag (hard commonsense NLI) [
-  <a href="https://dl.fbaipublicfiles.com/blt/BLT__Patches_Scale_Better_Than_Tokens.pdf">BLT paper</a>, <a href="https://x.com/npew/status/1525900849888866307">GPT-3</a> example]. 
+  <a href="https://dl.fbaipublicfiles.com/blt/BLT__Patches_Scale_Better_Than_Tokens.pdf">BLT paper</a>, <a href="https://x.com/npew/status/1525900849888866307">GPT-3 example</a>]. 
 </p>
 <h4>
   Robustness and Adversarial Attacks
@@ -804,7 +804,7 @@ This article explores the problems and limitations of tokenization, and delves i
 </h4>
 <p>
   <img style="width:800px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_1.png"/>
-  MegaByte proposes modeling bytes instead of tokens, but they use multiscale Transformer, specifically, MegaByte groups bytes into patches of fixed size P (P is typically 4 or 8). Each patch of bytes is vectorized and then fed into a “global” Transformer model. The output of the global model is then fed into a “local” Transformer model that autoregressively outputs byte-level logits.
+  MegaByte proposes modeling bytes instead of tokens, they use multiscale Transformer, specifically, MegaByte groups bytes into patches of fixed size P (P is typically 4 or 8). Each patch of bytes is vectorized and then fed into a “global” Transformer model. The output of the global model is then fed into a “local” Transformer model that autoregressively outputs byte-level logits.
 </p>
 
 <h4>
@@ -848,14 +848,19 @@ BLT models showed very promising results outperforming tokenization based LLM in
 </h4>
 <p>
   <img style="width:500px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_5.png"/>
-  Another idea is to forgo the token level of the typical LLM and instead operate on the sentence or Concept level. LCM / Large Concept Model include a sentence encoder that encodes sentences into an embedding space (a high dimensional, fixed size embedding), then the language/concept model predict the next sentence embedding, then a decoder that decode embedding predicted by the language/concept model into words.
+  Another idea is to forgo the token level of the typical LLM and instead operate on the sentence or concept level directly. LCM / Large Concept Model include a sentence encoder that encodes sentences into an embedding space (a high dimensional, fixed size embedding), then the language/concept model predict the next sentence embedding, then a decoder that decode embedding predicted by the language/concept model into words.
 <br/>
-  This is another good research direction worth pursuing, it has several advantages: Enables modeling of thoughts or higher level of abstraction directly, it is better at handling long contexts, it is better at generalization and multimodels, and it should be more efficient during inference.
+  This is another good research direction worth pursuing, it has several advantages:
+  <ul>
+    <li>Enables modeling of thoughts or higher level of abstraction directly.</li>
+    <li>Efficient at handling of long contexts, and efficient during inference.</li>
+    <li>Better at generalization and multimodality.</li>
+  </ul>
   <br/>
 That being said, this approach still have open research questions, such as: 
 <ul>
   <li>
-    <string>Granularity:</string> Sentences vary in their complexity and how much knowledge they contain. From the paper: “The choice of granularity for LCM is hard, as long sentences (>120 characters) could reasonably be considered as several concepts”.
+    <strong>Granularity:</strong> Sentences vary in their complexity and how much knowledge they contain. From the paper: “The choice of granularity for LCM is hard, as long sentences (>120 characters) could reasonably be considered as several concepts”.
   </li>
   <li>
     <strong>Specificity:</strong> The language/concept model inability to observe specific information (e.g. specific numbers, tokens, characters) could limit its reasoning ability. 
