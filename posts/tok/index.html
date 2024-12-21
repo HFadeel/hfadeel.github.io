@@ -777,7 +777,7 @@ This article explores the problems and limitations of tokenization, and delves i
 
 
 <h1 id="2-part"><strong>Research</strong></h1>
-<img style="width:400px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_0.png"/>
+<img style="width:800px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_0.png"/>
   <p>
     Most of the research follow the following ideas:
 <br/>
@@ -803,7 +803,7 @@ This article explores the problems and limitations of tokenization, and delves i
   MegaByte [<a href="https://arxiv.org/pdf/2305.07185">paper</a>]
 </h4>
 <p>
-  <img style="width:400px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_1.png"/>
+  <img style="width:800px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_1.png"/>
   MegaByte proposes modeling bytes instead of tokens, but they use multiscale Transformer, specifically, MegaByte groups bytes into patches of fixed size P (P is typically 4 or 8). Each patch of bytes is vectorized and then fed into a “global” Transformer model. The output of the global model is then fed into a “local” Transformer model that autoregressively outputs byte-level logits.
 </p>
 
@@ -818,7 +818,7 @@ This article explores the problems and limitations of tokenization, and delves i
   SpaceByte [<a href="https://arxiv.org/pdf/2404.14408">paper</a>]
 </h4>
 <p>
-  <img style="width:400px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_2.png"/>
+  <img style="width:800px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_2.png"/>
   So far, the research was mostly focused on the compute aspect of LLMs and not words, concepts or the appropriate unit of compute, and the grouping is done arbitrarily. SpaceByte takes a step forward by grouping bytes based on spacelike characters rather than an arbitrarily fixed size.  From the paper: “We define a byte to be spacelike if the byte does not encode a letter, number, or UTF-8 continuation byte2 . We apply the global blocks after any spacelike byte that is not preceded by another spacelike byte (and after any BOS token)”.
   <br/>
   Basically the “Global” Transformer is applied to the first letter of words. This is more into the right direction, it leverages the natural pattern of human language. SpaceByte was the first tokenization-less LLM that can match the performance of tokenization-based LLM.
@@ -830,7 +830,7 @@ This article explores the problems and limitations of tokenization, and delves i
 </h4>
 <p>
   Space based segmentation is a great first step, but not all the words represent concepts or require the same amount of computation. Byte Latent Transformer / BLT uses entropy-based grouping to dynamically segment bytes into patches. Patches are created based on the entropy of the next byte, allocating more compute and model capacity to complex regions.
-  <img style="width:400px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_3.png"/>
+  <img style="width:800px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_3.png"/>
   <strong>From the paper:</strong>
   <br/>
   BLT encodes bytes into dynamically sized patches, which serve as the primary units of computation. Patches are segmented based on the entropy of the next byte, allocating more compute and model capacity where increased data complexity demands it.
@@ -838,7 +838,7 @@ Why Entropy based grouping?
 <br/>
 Rather than relying on a rule-based heuristic such as whitespace, BLT instead takes a data-driven approach to identify high uncertainty next-byte predictions. BLT introduces entropy patching, which uses entropy estimates to derive patch boundaries. They trained a small byte-level auto-regressive language model on the training data for BLT and compute next byte entropies under the LM distribution pe over the byte vocabulary V:
 <br/>
-<img style="width:400px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_4.png"/>
+<img style="width:500px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_4.png"/>
 They experimented  with two methods to identify patch boundaries given entropies H(xi). The first, finds points above a global entropy threshold. The second, identifies points that are high relative to the previous entropy. The second approach can also be interpreted as identifying points that break approximate monotonically decreasing entropy within the patch.
 <br/>
 BLT models showed very promising results outperforming tokenization based LLM in CUTE (simple character manipulation tasks), noisy datasets and equally important BLT models show that it scales better than tokenization-based models.
@@ -847,7 +847,7 @@ BLT models showed very promising results outperforming tokenization based LLM in
   Large Concept Model / LCM [<a href="https://arxiv.org/pdf/2412.08821v2">paper</a>]
 </h4>
 <p>
-  <img style="width:400px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_5.png"/>
+  <img style="width:500px;display:block;margin-left:auto;margin-right:auto;" src="/assets/img/blog/tok_5.png"/>
   Another idea is to forgo the token level of the typical LLM and instead operate on the sentence or Concept level. LCM / Large Concept Model include a sentence encoder that encodes sentences into an embedding space (a high dimensional, fixed size embedding), then the language/concept model predict the next sentence embedding, then a decoder that decode embedding predicted by the language/concept model into words.
 <br/>
   This is another good research direction worth pursuing, it has several advantages: Enables modeling of thoughts or higher level of abstraction directly, it is better at handling long contexts, it is better at generalization and multimodels, and it should be more efficient during inference.
