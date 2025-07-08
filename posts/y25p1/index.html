@@ -736,7 +736,7 @@ My sabbatical so far has been great. I considered starting a startup, did resear
 <h2 id="1-reducing-overthinking-in-llms"><strong>(1) Reducing Overthinking in LLMs:</strong></h2>
 <p>Models like DeepSeek-R1 and its derivatives (e.g., DeepSeek-R1-Distill-Qwen-32B) can generate several thousand reasoning tokens before answering— even for simple questions like ‘What is 5 + 2’.<br>I used DeepSeek-R1-Distill-Qwen-32B in all my experiments. Initially, I investigated using prompt, SFT, and DPO to reduce overthinking. While the DPO showed strong results, I was aiming for more. After investigating the DPO behavior, I came up with an alternative objective that takes into account the accuracy and generation length directly and formulate it into PPO/GRPO style optimization. This approach, which I call Length &amp; Accuracy Policy Optimization (LAPO), performed significantly better at reducing overthinking while maintaining the model performance with a hyper-parameter for controlling the preference.</p>
 <h3 id="lets-describe-the-process-and-the-approaches"><strong>Let’s describe the process and the approaches:</strong></h3>
-<p><strong>For eva</strong><br><strong>Prompt</strong>: I Instructed the model to solve the problem as quickly as possible.</p>
+<p><strong>Prompt</strong>: I Instructed the model to solve the problem as quickly as possible.</p>
 <p><strong>SFT, DPO, and LAPO:</strong> Sampled 16 answers for each prompt. Training data consisted of 15K questions (5K coding from APPS and TACO; 10K math from AIME, MATH, and Olympiad subsets of NuminaMATH). </p>
 <ul>
 <li><strong>SFT:</strong> I selected the two shortest correct solutions per problem. Training done using standard SFT pipeline.  </li>
@@ -834,9 +834,11 @@ My sabbatical so far has been great. I considered starting a startup, did resear
 <ol>
 <li><strong>Positional Embedding:</strong> In MLA every query–key head carries its own Rotary Positional Embedding (RoPE), I opted to concentrate the positional signal in K into a small subset of dimensions. The remaining dimensions contain little positional content; we drop their RoPE and merge them with V for low-rank decomposition. Once RoPE is isolated, the key up-projection can be absorbed into the query projection exactly as in DeepSeek paper, which enables seamless MLA conversion.  </li>
 <li><strong>Training:</strong> Since the new - MLA - layers are not trained, we have to train them - initially - to simulate/reproduce the same output as the old (GQA) layers while freezing the rest of the model. After a few experimentation I landed on 3 step approach:  </li>
+<ol>
 <li>~25% of the training compute: We train each MLA layer independently to imitate the GQA layer using MSE, while freezing everything else (e.g. MLP). This phase is to bootstrap the attention weights. In this phase we have both attention layers executed in the forward pass to compute the MSE loss.  </li>
 <li>~50% of the training compute: We remove the old GQA layers and fine-tune the MLA layers while freezing everything else (e.g. MLP).  </li>
 <li>~25% of the training compute: We fine-tune the entire model using a standard diverse instruction-following dataset.</li>
+</ol>
 </ol>
 <p>The dataset I used for the 3 steps is <a href="https://huggingface.co/datasets/HuggingFaceTB/smoltalk">HuggingFace SmolTalk</a>. </p>
 <p>Here are the results using Qwen 2.5 32B:</p>
