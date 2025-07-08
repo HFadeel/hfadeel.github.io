@@ -18,6 +18,23 @@
   <logo>/assets/img/favicons/favicon-96x96.png</logo>
 
 <entry>
+    <title>My 2025 So Far (part 1): Reasoning LLMs, MLA, and Summiting Everest</title>
+    <link href="https://hfadeel.github.io/posts/y25p1/" rel="alternate" type="text/html" title="My 2025 So Far (part 1): Reasoning LLMs, MLA, and Summiting Everest" />
+    <published>2025-07-07T19:32:00-07:00</published>
+  
+    <updated>2025-07-07T23:56:30-07:00</updated>
+  
+    <id>https://hfadeel.github.io/posts/y25p1/</id>
+    <content src="https://hfadeel.github.io/posts/y25p1/" />
+    <author>
+      <name>Haytham ElFadeel</name>
+    </author>
+    <summary>
+    My sabbatical so far has been great. I considered starting a startup, did research on reasoning in LLMs and Multi-Head Latent Attention (MLA), built an autonomous SWE agent with a model I trained, and climbed Everest and Ama Dablam. Here are some quick updates.
+    </summary>
+    </entry>
+
+<entry>
     <title>Towards Tokenization-Free Language Models: Research Trends</title>
     <link href="https://hfadeel.github.io/posts/tok/" rel="alternate" type="text/html" title="Towards Tokenization-Free Language Models: Research Trends" />
     <published>2024-12-20T19:32:00-07:00</published>
