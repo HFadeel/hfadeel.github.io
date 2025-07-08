@@ -40,7 +40,7 @@
 <meta name="author" content="Haytham ElFadeel" />
 <meta property="og:locale" content="en" />
 <meta name="description" content="." />
-<meta property="og:description" content="My sabbatical so far has been great. I considered starting a startup, did research on reasoning in LLMs and Multi-Head Latent Attention (MLA), built an autonomous SWE agent with a fine-tuned model, and climbed both Everest and Ama Dablam. Here are some quick updates." />
+<meta property="og:description" content="My sabbatical so far has been great. I considered starting a startup, did research on reasoning in LLMs and Multi-Head Latent Attention (MLA), built an autonomous SWE agent with a fine-tuned model, and climbed Everest and Ama Dablam. Here are some quick updates." />
 <link rel="canonical" href="https://hfadeel.github.io//posts/y25p1/" />
 <meta property="og:url" content="https://hfadeel.github.io//posts/y25p1/" />
 <meta property="og:site_name" content="Haytham ElFadeel" />
@@ -50,7 +50,7 @@
 <meta property="twitter:title" content="My 2025 So Far (part 1): Reasoning LLMs, MLA, and Summiting Everest" />
 <meta name="google-site-verification" content="google_meta_tag_verification" />
 <script type="application/ld+json">
-{"mainEntityOfPage":{"@type":"WebPage","@id":"https://hfadeel.github.io//posts/y25p1/"},"@type":"BlogPosting","url":"https://hfadeel.github.io//posts/y25p1/","headline":"My 2025 So Far (part 1): Reasoning LLMs, MLA, and Summiting Everest","dateModified":"2025-07-07T23:56:30-07:00","datePublished":"2025-07-07T19:32:00-07:00","author":{"@type":"Person","name":"Haytham ElFadeel"},"description":"My sabbatical so far has been great. I considered starting a startup, did research on reasoning in LLMs and Multi-Head Latent Attention (MLA), built an autonomous SWE agent with a fine-tuned model, and climbed both Everest and Ama Dablam. Here are some quick updates.","@context":"https://schema.org"}</script>
+{"mainEntityOfPage":{"@type":"WebPage","@id":"https://hfadeel.github.io//posts/y25p1/"},"@type":"BlogPosting","url":"https://hfadeel.github.io//posts/y25p1/","headline":"My 2025 So Far (part 1): Reasoning LLMs, MLA, and Summiting Everest","dateModified":"2025-07-07T23:56:30-07:00","datePublished":"2025-07-07T19:32:00-07:00","author":{"@type":"Person","name":"Haytham ElFadeel"},"description":"My sabbatical so far has been great. I considered starting a startup, did research on reasoning in LLMs and Multi-Head Latent Attention (MLA), built an autonomous SWE agent with a fine-tuned model, and climbed Everest and Ama Dablam. Here are some quick updates.","@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 
 
@@ -724,7 +724,7 @@
         
 
 <p>
-My sabbatical so far has been great. I considered starting a startup, did research on reasoning in LLMs and Multi-Head Latent Attention (MLA), built an autonomous SWE agent with a fine-tuned model, and climbed both Everest and Ama Dablam. Here are some quick updates.
+My sabbatical so far has been great. I considered starting a startup, did research on reasoning in LLMs and Multi-Head Latent Attention (MLA), built an autonomous SWE agent with a fine-tuned model, and climbed Everest and Ama Dablam. Here are some quick updates.
 </p>
 
 <h1 id="1-part"><strong>Reasoning in LLMs - H1 2025</strong></h1>
@@ -835,9 +835,9 @@ My sabbatical so far has been great. I considered starting a startup, did resear
 <li><strong>Positional Embedding:</strong> In MLA every query–key head carries its own Rotary Positional Embedding (RoPE), I opted to concentrate the positional signal in K into a small subset of dimensions. The remaining dimensions contain little positional content; we drop their RoPE and merge them with V for low-rank decomposition. Once RoPE is isolated, the key up-projection can be absorbed into the query projection exactly as in DeepSeek paper, which enables seamless MLA conversion.  </li>
 <li><strong>Training:</strong> Since the new - MLA - layers are not trained, we have to train them - initially - to simulate/reproduce the same output as the old (GQA) layers while freezing the rest of the model. After a few experimentation I landed on 3 step approach:  </li>
 <ol>
-<li>~25% of the training compute: We train each MLA layer independently to imitate the GQA layer using MSE, while freezing everything else (e.g. MLP). This phase is to bootstrap the attention weights. In this phase we have both attention layers executed in the forward pass to compute the MSE loss.  </li>
-<li>~50% of the training compute: We remove the old GQA layers and fine-tune the MLA layers while freezing everything else (e.g. MLP).  </li>
-<li>~25% of the training compute: We fine-tune the entire model using a standard diverse instruction-following dataset.</li>
+<li>25% of the training compute: We train each MLA layer independently to imitate the GQA layer using MSE, while freezing everything else (e.g. MLP). This phase is to bootstrap the attention weights. In this phase we have both attention layers executed in the forward pass to compute the MSE loss.  </li>
+<li>50% of the training compute: We remove the old GQA layers and fine-tune the MLA layers while freezing everything else (e.g. MLP).  </li>
+<li>25% of the training compute: We fine-tune the entire model using a standard diverse instruction-following dataset.</li>
 </ol>
 </ol>
 <p>The dataset I used for the 3 steps is <a href="https://huggingface.co/datasets/HuggingFaceTB/smoltalk">HuggingFace SmolTalk</a>. </p>
