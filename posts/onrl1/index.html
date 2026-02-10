@@ -264,27 +264,25 @@
 <p>Reinforcement learning (RL) is a subset of machine learning that deals with sequential decision-making. The key difference from supervised learning lies in the data assumptions: supervised learning assumes data is i.i.d. (independent and identically distributed), meaning samples are independent of one another. In sequential decision-making, however, each action influences subsequent samples—creating temporal dependencies and non-stationary data distributions that require fundamentally different algorithmic approaches.</p>
 <p>The RL framework formalizes this as an agent interacting with an environment, receiving observations and rewards, and learning a policy that maximizes cumulative reward over time. This formulation naturally captures problems where actions have long-term consequences: robotics control, game playing, resource allocation, and recommendation systems.</p>
 <p>The RL landscape encompasses numerous paradigms, categories, and algorithms, shaped by factors like data availability, simulation cost, and whether a dynamics model or reward signal is accessible. While most RL successes to date have been online and on-policy (more on that in part 2), this blog series focuses on offline RL—an interesting paradigm when real-world interaction is expensive, dangerous, or unavailable (e.g. autonomous vehicles).</p>
-<hr>
-<h2 id="what-is-offline-rl-">What is Offline RL?</h2>
-<p>In standard (online) RL, an agent learns by interacting with an environment: it takes actions, observes rewards, and updates its policy through this feedback loop. Formally, at each timestep the agent is in state \(s_t\), takes action \(a_t\), receives reward \(r_t\), and transitions to state \(s_{t+1}\). The objective is to </p>
-<p>maximize expected discounted return:</p>
+
+<h1 id="what-is-offline-rl-">What is Offline RL?</h1>
+<p>In standard (online) RL, an agent learns by interacting with an environment: it takes actions, observes rewards, and updates its policy through this feedback loop. Formally, at each timestep the agent is in state \(s_t\), takes action \(a_t\), receives reward \(r_t\), and transitions to state \(s_{t+1}\). The objective is to maximize expected discounted return:</p>
 <p>$$J(\pi)=\mathbb{E}_{\tau\sim \pi}\left[\sum_{t=0}^{\infty}\gamma^t r_t\right]$$</p>
 <p>This work well, but in real-world applications we often can&#39;t afford the luxury of extensive exploration. You can&#39;t let a robot randomly experiment with surgical procedures, or allow a self-driving car to learn collision avoidance through actual collisions.</p>
 <p>The natural alternative is simulation—but simulation has its own drawbacks: it can be computationally expensive, struggles to capture complex real-world dynamics, and still leaves sim-to-real domain adaptation as an open problem.</p>
 <p>So practitioners often turn to behavior cloning (BC), treating the decision-making problem as supervised learning: given state \(s\), predict the action \(a\) that an expert would take. This is simple and scales well—which is why most robotics and autonomous driving companies relied on it for years. But BC ignores the sequential nature of the problem: errors compound over time as the agent drifts into states the expert never visited, a phenomenon known as <strong>distribution shift</strong> or <strong>covariate shift</strong>.</p>
-<p><strong>Offline RL</strong> offers a middle ground. Like BC, it learns entirely from a fixed dataset of previously collected experience—no environment interaction required. But unlike BC, it retains the RL objective: maximize cumulative reward rather than simply mimicking demonstrations. This allows offline RL to potentially <em>improve</em> upon the behavior policy that generated the data, rather than just imitating it.</p>
-<p>Note: the <strong>behavior policy</strong> \(\pi_\beta\) is whatever policy (or mix of policies) generated the dataset. It could be a human expert, a scripted controller, an earlier learned policy, or a combination of all three.</p>
-<hr>
+<p>Offline RL offers a middle ground. Like BC, it learns entirely from a fixed dataset of previously collected experience—no environment interaction required. But unlike BC, it retains the RL objective: maximize cumulative reward rather than simply mimicking demonstrations. This allows offline RL to potentially <em>improve</em> upon the behavior policy that generated the data, rather than just imitating it.</p>
+<p>Note: the behavior policy \(\pi_\beta\) is whatever policy (or mix of policies) generated the dataset. It could be a human expert, a scripted controller, an earlier learned policy, or a combination of all three.</p>
+
 <h1 id="why-offline-rl-and-why-not-bc">Why Offline RL and why not BC</h1>
-<p>Behavior cloning is simple and often effective when data is high-quality and near-expert. But real-world data is rarely so clean. Offline RL offers two main advantages:</p>
+<p>Behavior cloning is simple and often effective when data is high-quality and near-expert. But real-world data is rarely so clean. Offline RL offers two main advantages:
 <ul>
 <li>The ability to learn from suboptimal data.</li>
 <li>Stronger generalization through compositional and corrective reasoning.</li>
 </ul>
+</p>
 <h2 id="learning-from-suboptimal-data">Learning from Suboptimal Data</h2>
-<p>Real-world datasets are messy, they contain mistakes, failures, and suboptimal decisions.</p>
-<p>Behavioral cloning treats all data equally—if you clone noisy behavior, you get a noisy policy.</p>
-<p>Offline RL algorithms, by contrast, can extract optimal behavior by:</p>
+<p>Real-world datasets are messy, they contain mistakes, failures, and suboptimal decisions. Behavioral cloning treats all data equally—if you clone noisy behavior, you get a noisy policy. Offline RL algorithms, by contrast, can extract optimal behavior by:</p>
 <ul>
 <li>Weighting actions by their learned advantages</li>
 <li>Propagating value information to identify which parts of trajectories are worth replicating</li>
@@ -299,22 +297,22 @@
 <h3 id="-type-3-compositional-generalization-stitching-offline-rl-is-better-"><strong>Type 3: Compositional Generalization (Stitching) = Offline RL is better</strong></h3>
 <p>The ability to compose fragments of suboptimal trajectories into a new, successful trajectory—combining parts of Trajectory A and Trajectory B to create Trajectory C, which was never observed in the dataset.</p>
 <p>BC is trajectory blind. If it sees a suboptimal path \(A \to B \to \text{Fail}\) and another path \(B \to C \to \text{Goal}\), BC  will likely learn the average action at \(B\). It does not know that the transition \(B \to C\) is &quot;better&quot; than \(B \to \text{Fail}\) unless you filter the data beforehand.</p>
-<p><strong>Offline RL</strong> excel at this<strong>.</strong> Through the Bellman equation, the high value of reaching &quot;Goal&quot; backpropagates to state \(B\). When the agent arrives at \(A\), the Q-function tells it to take the action leading to \(B\) specifically because \(B\) connects to the high-value path, effectively stitching \(A \to B\) (from trajectory 1) and \(B \to C\) (from trajectory 2).</p>
+<p>Offline RL excel at this. Through the Bellman equation, the high value of reaching &quot;Goal&quot; backpropagates to state \(B\). When the agent arrives at \(A\), the Q-function tells it to take the action leading to \(B\) specifically because \(B\) connects to the high-value path, effectively stitching \(A \to B\) (from trajectory 1) and \(B \to C\) (from trajectory 2).</p>
 <h3 id="-type-4-corrective-generalization-offline-rl-is-better-"><strong>Type 4: Corrective Generalization = Offline RL is better</strong></h3>
 <p>The ability to recover if the agent drifts off the ideal trajectory.</p>
-<p><strong>BC</strong> suffers from <strong>Covariate Shift</strong>. If the agent drifts to a state not in the expert data, BC has undefined behavior, often leading to compounding errors.</p>
-<p><strong>Offline RL</strong> can handle this if the dataset contains suboptimal/recovery data. Offline RL can learn &quot;this state is bad, do X to get back to high value regions,&quot; whereas BC might confusingly try to clone the &quot;bad&quot; behavior if it&#39;s present in the dataset.</p>
-<hr>
+<p>BC suffers from Covariate Shift. If the agent drifts to a state not in the expert data, BC has undefined behavior, often leading to compounding errors.</p>
+<p>Offline RL can handle this if the dataset contains suboptimal/recovery data. Offline RL can learn &quot;this state is bad, do X to get back to high value regions,&quot; whereas BC might confusingly try to clone the &quot;bad&quot; behavior if it&#39;s present in the dataset.</p>
+
 <h1 id="how-does-offline-rl-work">How does Offline RL work</h1>
 <p>To really understand offline RL, let&#39;s reinvent it naïvely, discover the problems, and see how they motivate the three main algorithmic approaches.</p>
 <h2 id="-a-na-ve-approach-"><strong>A Naïve Approach:</strong></h2>
 <p>Given a dataset \(\mathcal{D}=\{(s_t,a_t,r_t,s_{t+1})\}\) collected by some behavior policy \(\pi_\beta\), a natural idea is:</p>
 <ol>
 <li>Train a Q-function on the dataset.</li>
-<li>Use this Q-function to improve our policy (e.g., via DDPG or SAC)</li>
+<li>Use this Q-function to improve our policy (e.g., via DDPG or SAC).</li>
 </ol>
 <p>Why not value function like in AC and PPO? Because value functions only tells us how good a state is, it doesn’t tell us which action to take without on-policy rollout. Q-functions allow us to evaluate and compare arbitrary actions directly from offline data, which what we need to improve the policy.</p>
-<p>What Will Go Wrong:</p>
+<p><strong>What Will Go Wrong:</strong></p>
 <p>The Q-function learns to estimate action values for the states and actions in the dataset. But the dataset doesn&#39;t cover all actions in all states. For state-action pairs outside the data distribution, our Q-estimates are unreliable—essentially hallucinated.</p>
 <p>This wouldn&#39;t be catastrophic if the errors were random. But Q-learning uses a max operator:</p>
 <p>$$Q(s_t, a_t) \leftarrow r_t + \gamma \max_{a'} Q(s_{t+1}, a')$$</p>
