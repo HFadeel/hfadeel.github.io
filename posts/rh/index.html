@@ -266,7 +266,7 @@
 <h3 id="proxy-gap-and-goodhart-pressure">Proxy gap and Goodhart pressure</h3>
 <p>Reward hacking occurs when a reinforcement learning (RL) agent exploits flaws or ambiguities in a proxy reward function to achieve high rewards without genuinely learning or completing the intended task. The core reason reward hacking occurs is the unobservability of the true reward function, which forces us to replace it with a simplified, underdefined proxy.</p>
 <p>Mathematically, Let \(u(x, y)\) be the true (unobservable) utility of a response y to prompt x. RL replaces $u$ with a learned proxy \(r_\phi(x, y)\). Policy optimization then solves something like:</p>
-<p>$$\max\pi \; \mathbb{E}{y \sim \pi(\cdot|x)}\left[r\phi(x, y)\right] - \beta \,\mathrm{KL}(\pi \,|\, \pi{\text{ref}})$$</p>
+<p>$$\max_\pi \; \mathbb{E}_{y \sim \pi(\cdot|x)}\left[r_\phi(x, y)\right] - \beta \,\mathrm{KL}(\pi \,\|\, \pi_{\text{ref}})$$</p>
 <p>As soon as optimization pressure becomes strong, <strong>Goodhart’s law</strong> kicks in: the policy actively searches for regions where $r_\phi$ is high but poorly aligned with u. KL regularization slows this down but does not eliminate it.</p>
 <h3 id="distribution-shift-is-intrinsic-to-rlhf">Distribution shift is intrinsic to RLHF</h3>
 <p>Reward models are trained on a static dataset of human comparisons. Policy optimization <em>changes the output distribution</em>. This creates a distribution shift problem: the reward model is asked to score samples far outside its training support.</p>
@@ -280,7 +280,7 @@
 <h3 id="reward-shaping-and-bounding">Reward shaping and bounding</h3>
 <p>A surprisingly effective idea is to <strong>bound</strong> the reward signal. If reward grows without limit, critics become unstable and policies are incentivized to chase extreme values that often correspond to exploitation.</p>
 <p>Preference-as-Reward (PAR) formalizes this intuition by converting raw reward differences into bounded, centered signals—often via a sigmoid on reward differences relative to a reference response. The resulting reward behaves more like a probability than a score, which stabilizes training and empirically delays reward hacking.</p>
-<p>Formally, let \(r(x, y)\) be the raw output of the reward model for prompt $x$ and response $y$. Let \(\mu(x)\) be a reference reward (baseline), typically derived from the average reward for the same prompt or the reward of a reference policy \(\pi{ref}\). The shaped reward \(R{PAR}\) is defined as:</p>
+<p>Formally, let \(r(x, y)\) be the raw output of the reward model for prompt \(x\) and response \(y\). Let \(\mu(x)\) be a reference reward (baseline), typically derived from the average reward for the same prompt or the reward of a reference policy \(\pi_{ref}\). The shaped reward \(R_{PAR}\) is defined as:</p>
 <p>$$R_{PAR}(x, y) = \sigma \left( \frac{r(x, y) - \mu(x)}{\tau} \right)$$</p>
 <p>where \(\sigma(\cdot)\) is the logistic function and \(\tau\) is a temperature parameter controlling the steepness of the preference curve.</p>
 <p>If you find this formulation very similar to GRPO, you&#39;re not mistaken—the only difference is that PAR applies the logistic function while GRPO divides by the standard deviation. Note that if you&#39;re already using GRPO-style baselining, PAR becomes largely redundant.</p>
@@ -290,18 +290,18 @@
 <p>Uncertainty-Weighted Optimization (UWO) is a common conservative score aggregation:</p>
 <p>$$R_{\text{UWO}}(x,y) = \mathbb{E}[r(x,y)] - \lambda \cdot \mathrm{Std}[r(x,y)]$$</p>
 <p>Worse-case Optimization (WCO) is another common scoring aggregation:</p>
-<p>$$R{WCO}(x, y) = \min{i} r_i(x, y)$$</p>
+<p>$$R_{WCO}(x, y) = \min_{i} r_i(x, y)$$</p>
 <p>Empirically, ensemble-based pessimism significantly reduces overoptimization during RL. Using UWO changes the PPO dynamics: the agent naturally avoids regions of the policy space where the ensemble disagrees, effectively steering the policy back toward the training distribution&#39;s support.</p>
 <p>Research has also shown that simply setting a different random seed before fine-tuning a base LLM into a reward model is sufficient to produce diverse ensemble members—no pretraining required.</p>
-<p>However, standard ensemble requires maintaining \(M\) distinct models in memory and running \(M\) forward passes during RL, which is prohibitively expensive for LLMs. <strong>WARM</strong> (Weight Averaged Reward Models) proposes a solution based on the geometry of the loss landscape, termed &quot;Rewarded Soup.&quot; Instead of averaging the <em>predictions</em> of \(M\) models (Ensemble Averaging), WARM averages the <em>weights</em> of \(M\) fine-tuned reward models into a single model \(\theta_{WARM}\).</p>
-<p>$$\theta{WARM} = \frac{1}{M} \sum{i=1}^M \theta_i$$</p>
+<p>However, standard ensemble requires maintaining \(M\) distinct models in memory and running \(M\) forward passes during RL, which is prohibitively expensive for LLMs. <strong>WARM</strong> (Weight Averaged Reward Models) proposes a solution based on the geometry of the loss landscape, termed &quot;Rewarded Soup.&quot; Instead of averaging the <em>predictions</em> of \(M\) models (Ensemble Averaging), WARM averages the weights of \(M\) fine-tuned reward models into a single model \(\theta_{WARM}\).</p>
+<p>$$\theta_{WARM} = \frac{1}{M} \sum_{i=1}^M \theta_i$$</p>
 <p>This works because reward models fine-tuned from the same pretrained checkpoint with different seeds tend to lie in the same loss basin, meaning linear interpolation between them stays in a region of low loss. The resulting single model captures much of the ensemble&#39;s diversity at the cost of just one forward pass.
 In practice, WARM achieves reliability gains comparable to full ensembles while matching the inference cost of a single model. The authors also find that WARM produces reward models that are more robust to distribution shift and label corruption than any individual ensemble member, suggesting that weight averaging acts as an implicit regularizer. Notably, WARM composes well with other mitigation strategies—it can be used alongside KL regularization or UWO-style pessimism for further gains.</p>
 <h2 id="better-reward-models">Better reward models</h2>
 <h3 id="invariance-and-shortcut-mitigation">Invariance and shortcut mitigation</h3>
 <p>PRISM reframes reward modeling as a problem of learning invariances. The core idea is that if a superficial transformation—such as adding filler phrases, inflating length, or inserting flattery—does not change the true quality of a response, then the reward model should be invariant to that transformation.</p>
-<p>Concretely, PRISM defines a set of shortcut transformation groups \(\mathcal{G} = {g_1, g_2, \dots, g_K}\), where each \(g_k\) represents a meaning-preserving but reward-gaming perturbation (e.g., paraphrasing to increase length, appending sycophantic hedging). The training objective augments the standard preference loss with an invariance penalty:</p>
-<p>$$\mathcal{L}{\text{PRISM}} = \mathcal{L}{\text{pref}}(\theta) + \alpha \sum{k=1}^{K} \mathbb{E}{x,y}\left[\left(r\theta(x, y) - r\theta(x, g_k(y))\right)^2\right]$$</p>
+<p>Concretely, PRISM defines a set of shortcut transformation groups \(\mathcal{G} = \{g_1, g_2, \dots, g_K\}\), where each \(g_k\) represents a meaning-preserving but reward-gaming perturbation (e.g., paraphrasing to increase length, appending sycophantic hedging). The training objective augments the standard preference loss with an invariance penalty:</p>
+<p>$$\mathcal{L}_{\text{PRISM}} = \mathcal{L}_{\text{pref}}(\theta) + \alpha \sum_{k=1}^{K} \mathbb{E}_{x,y}\left[\left(r_\theta(x, y) - r_\theta(x, g_k(y))\right)^2\right]$$</p>
 <p>where \(\alpha\) controls the strength of the invariance regularization. By explicitly penalizing reward differences between a response and its shortcut-transformed variant, PRISM reduces the reward model&#39;s reliance on spurious features.</p>
 <p>This approach is elegant and theoretically grounded, but it relies on knowing—or discovering—the right shortcut groups. In practice, this means curating a library of transformations, which may not cover novel exploits the policy discovers during training.</p>
 <h3 id="information-theoretic-reward-modeling">Information-theoretic reward modeling</h3>
