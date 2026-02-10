@@ -292,7 +292,7 @@
 <hr>
 <h2>The Bradley-Terry-Luce Model</h2>
 <p>Most RLHF systems use the <strong>Bradley-Terry-Luce (BTL)</strong> model to learn reward functions from pairwise comparisons. Given two responses \(a_w\) (winner) and \(a_l\) (loser) to a prompt \(x\), BTL models the probability that an annotator prefers \(a_w\) as:</p>
-<p>$$P(a_w \succ a_l | x) = \sigma(r^*(x, a_w) - r^*(x, a_l)) = \frac{e^*{r^(x, a_w)}}{e^{r^*(x, a_w)} + e^{r^*(x, a_l)}}$$</p>
+<p>$$P(a_w \succ a_l | x) = \sigma(r^*(x, a_w) - r^*(x, a_l)) = \frac{e^{r^*(x, a_w)}}{e^{r^*(x, a_w)} + e^{r^*(x, a_l)}}$$</p>
 <p>where \(\sigma\) is the logistic function and \(r^*\) is a latent reward function. The model is trained via maximum likelihood estimation on a dataset of human-labeled preferences.</p>
 <p>BTL it&#39;s simple, differentiable, and handles noisy labels gracefully through its probabilistic formulation. But it makes one critical assumption—<strong>all annotators share the same reward function \(r^*\)</strong>. This is where things break down.</p>
 <p>Anyone who worked with annotators before know that this is a false assumption. For example, In my AV experience where we had to annotators label simulation and real driving sense as safe vs not safe or will this result in a collision or not, people vary widely in what they consider safe or not even with very strict guideline and training.</p>
