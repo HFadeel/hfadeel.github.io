@@ -275,13 +275,13 @@
 
         </blockquote></p>
 
-        <p>This essay argues that the bottleneck is <strong>representational efficiency,</strong> more than anything else, more than raw expressivity. The headline “universal approximation” is correct but incomplete: it does not tell you how many parameters, how many regions, how much depth, or how much data is needed to represent the structure of interest <em>in a way that training actually finds</em>.</p>
+        <p>This essay argues that the bottleneck is <strong>representational efficiency</strong>, more than anything else, more than raw expressivity. The headline “universal approximation” is correct but incomplete: it does not tell you how many parameters, how many regions, how much depth, or how much data is needed to represent the structure of interest <em>in a way that training actually finds</em>.</p>
 
         <hr />
 
         <h2 id="universality-is-the-wrong-headline">Universality is the wrong headline</h2>
 
-        <p>A model class being a <strong>universal approximator</strong> means: for any (reasonable) target function \(f^*\) and error tolerance \(\epsilon\), there exists parameters \(\theta\) such that \(f\_{\theta}\) approximates \(f^*\) within \(\epsilon\).</p>
+        <p>A model class being a <strong>universal approximator</strong> means: for any (reasonable) target function \(f^*\) and error tolerance \(\epsilon\), there exists parameters \(\theta\) such that \(f_{\theta}\) approximates \(f^*\) within \(\epsilon\).</p>
 
         <p>But universality says nothing about:</p>
 
@@ -529,7 +529,7 @@
 
         <p>Instead of forcing multiplication to emerge indirectly, we can add a small budget of explicit bilinear terms:</p>
 
-        <p>$$\text{Block}(x)=W\_2\,\sigma(W\_1 x)\;+\;\sum\_{k=1}^{K} v_k \,\big(a\_k^\top x\big)\big(b_k^\top x\big)$$.</p>
+        <p>$$\text{Block}(x)=W_2\,\sigma(W_1 x)\;+\;\sum_{k=1}^{K} v_k \,\big(a_k^\top x\big)\big(b_k^\top x\big)$$.</p>
 
         <ul>
 
@@ -557,9 +557,9 @@
 
         <p>Instead of one global basis everywhere (one specific activation function), allow the model to choose/mix bases depending on input. A general formulation:</p>
 
-        <p>$$h(x) = \sum\_{m=1}^{N} \alpha\_m(x)\\,\phi_m(Wx), \quad \alpha(x)=\mathrm{softmax}\!\left(\frac{Gx}{\tau}\right)$$.</p>
+        <p>$$h(x) = \sum_{m=1}^{N} \alpha_m(x)\\,\phi_m(Wx), \quad \alpha(x)=\mathrm{softmax}\!\left(\frac{Gx}{\tau}\right)$$.</p>
 
-        <p>Where \(\phi\_m\) could include:</p>
+        <p>Where \(\phi_m\) could include:</p>
 
         <ul>
 
