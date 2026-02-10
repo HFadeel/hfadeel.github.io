@@ -290,10 +290,10 @@
 <p>The standard approach assumes all humans share a single underlying reward function. This assumption is mathematically convenient but empirically false. When we aggregate preferences from diverse annotators, we don&#39;t get a representative model—we get a compromised one that may satisfy no one.</p>
 <hr>
 <h2>The Bradley-Terry-Luce Model</h2>
-<p>Most RLHF systems use the <strong>Bradley-Terry-Luce (BTL)</strong> model to learn reward functions from pairwise comparisons. Given two responses \(a_w\)(winner) and $$a_l$$ (loser) to a prompt x, BTL models the probability that an annotator prefers $$a_w$$ as:</p>
+<p>Most RLHF systems use the <strong>Bradley-Terry-Luce (BTL)</strong> model to learn reward functions from pairwise comparisons. Given two responses \(a_w\) (winner) and \(a_l$\) (loser) to a prompt x, BTL models the probability that an annotator prefers \(a_w\) as:</p>
 <p>$$P(a_w \succ a_l | x) = \sigma(r^(x, a_w) - r^(x, a_l)) = \frac{e^{r^(x, a_w)}}{e^{r^(x, a_w)} + e^{r^*(x, a_l)}}$$</p>
-<p>where $$\sigma$$ is the logistic function and $$r^*$$ is a latent reward function. The model is trained via maximum likelihood estimation on a dataset of human-labeled preferences.</p>
-<p>BTL it&#39;s simple, differentiable, and handles noisy labels gracefully through its probabilistic formulation. But it makes one critical assumption—<strong>all annotators share the same reward function $$r^*$$.</strong> This is where things break down.</p>
+<p>where \(\sigma\) is the logistic function and \(r^*\) is a latent reward function. The model is trained via maximum likelihood estimation on a dataset of human-labeled preferences.</p>
+<p>BTL it&#39;s simple, differentiable, and handles noisy labels gracefully through its probabilistic formulation. But it makes one critical assumption—<strong>all annotators share the same reward function \(r^*\).</strong> This is where things break down.</p>
 <p>Anyone who worked with annotators before know that this is a false assumption. For example, In my AV experience where we had to annotators label simulation and real driving sense as safe vs not safe or will this result in a collision or not, people vary widely in what they consider safe or not even with very strict guideline and training.</p>
 <hr>
 <h2>What&#39;s Wrong with BTL? Three Core Problems</h2>
@@ -317,10 +317,10 @@
 <p>We can think of VPL as learning a &quot;preference space&quot; where each user occupies a different location (kinda like VAE). When a new user provides a few preference examples, VPL figures out where they sit in this space and uses that position to predict what they&#39;ll like. So, rather than averaging all preferences into one reward function, VPL maintains the full diversity by conditioning on user identity. The averaging problem disappears because we&#39;re no longer trying to fit one function to everyone—we&#39;re fitting a family of functions indexed by the latent z.</p>
 <p>VPL replaces the standard BTL likelihood with a latent-conditional version:</p>
 <p>$$P(a_w \succ a_l | x, z) = \sigma(r_\phi(x, a_w, z) - r_\phi(x, a_l, z))$$</p>
-<p>The latent z is inferred via variational inference. Given a set of N preference examples from a user, an encoder $$q_\psi$$ produces a distribution over z:</p>
+<p>The latent z is inferred via variational inference. Given a set of N preference examples from a user, an encoder \(q_\psi\) produces a distribution over z:</p>
 <p>$$z \sim q_\psi(z | {(s_A^i, s_B^i, y^i)}_{i=1}^N)$$</p>
 <p>VPL optimizes an evidence lower bound (ELBO).</p>
-<p>VPL enables <strong>active learning</strong>—using the uncertainty in $$q_\psi$$ to select maximally informative preference queries. Experiments show this achieves the same personalization with half the queries compared to random selection.</p>
+<p>VPL enables <strong>active learning</strong>—using the uncertainty in \(q_\psi\) to select maximally informative preference queries. Experiments show this achieves the same personalization with half the queries compared to random selection.</p>
 <p><strong>Results</strong>: On pluralistic language datasets, VPL outperforms standard BTL by 10-25% in reward prediction accuracy when users have divergent preferences.</p>
 <p><strong>Limitations</strong>:</p>
 <ul>
@@ -332,10 +332,10 @@
 <hr>
 <h3>Solution 2: MiCRo (Mixture Modeling + Context-aware Routing)</h3>
 <p>Instead of one reward function trying to please everyone, MiCRo learns K different &quot;expert&quot; reward functions—one might specialize in users who like detailed responses, another for users who prefer brevity, etc. When a query comes in, a router looks at the context (the prompt, user metadata, or a few calibration questions) and decides which expert(s) to consult. It&#39;s like having a panel of judges with different tastes, and choosing which judges&#39; opinions matter for each case.</p>
-<p><strong>Stage 1 – Mixture Modeling</strong>: Instead of a single reward function, learn K reward functions $${r_{\phi_k}}_{k=1}^K$$
+<p><strong>Stage 1 – Mixture Modeling</strong>: Instead of a single reward function, learn K reward functions \({r_{\phi_k}}_{k=1}^K\)
 with context-dependent mixture weights:</p>
 <p>$$P(a_w \succ a_l | x) = \sum_{k=1}^{K} f_{\psi,k}(x) \cdot \sigma(r_{\phi_k}(x, a_w) - r_{\phi_k}(x, a_l))$$</p>
-<p>where $$f_\psi: \mathcal{X} \rightarrow \Delta_K$$ is a router network outputting mixture weights.</p>
+<p>where \(f_\psi: \mathcal{X} \rightarrow \Delta_K\) is a router network outputting mixture weights.</p>
 <p><strong>Stage 2 – Context-aware Routing</strong>: Given additional contextual information (user instructions, metadata, interaction history), fine-tune the router. This enables efficient adaptation with minimal supervision—just 50 labeled examples per attribute in experiments.</p>
 <p><strong>Key Theoretical Result</strong>: MiCRo proves that for mixture preference distributions, the cross-entropy loss of any single BTL model has a lower bound proportional to the variance across subpopulations:</p>
 <p>$$\mathcal{L}_{CE}(r) \geq 2\rho K \cdot \mathbb{E}_x\left[\text{Var}z[{s_k^*}{k=1}^K]\right] + H(x, \pi, P(z|x))$$</p>
