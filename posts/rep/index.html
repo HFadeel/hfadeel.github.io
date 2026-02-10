@@ -459,49 +459,43 @@
 
         <ol>
 
-        <li>Compute a feature vector from the input:</li>
+        <li>Compute a feature vector from the input:
+          <p>&nbsp;   $$\phi(x) = Ux$$</p>
+        </li>
 
-        </ol>
+               
+
+        <li>Assemble a square matrix as an affine function of features:
 
         
-        <p>&nbsp;   $$\phi(x) = Ux$$</p>
-
-
-        <ol start="2">
-
-        <li>Assemble a square matrix as an affine function of features:</li>
-
-        </ol>
-
-
         <p>&nbsp;   $$M(x) = B + \sum_{a=1}^{d} \phi_a(x)\, T_a,$$</p>
-
-
         <p>&nbsp;   where each \(T_a \in \mathbb{R}^{n\times n}\) is a learned “template” matrix, and B is a learned bias matrix.</p>
+        </li>
 
-        <p>&nbsp;   </p>
 
-        <ol start="3">
+        
 
-        <li>Apply the matrix exponential:</li>
+        
+        <li>Apply the matrix exponential:
 
-        </ol>
-
+        
 
 
         <p>&nbsp;   $$\exp(M) = \sum_{k=0}^{\infty}\frac{1}{k!}M^k$$.</p>
+        </li>
 
 
+        
 
-        <ol start="4">
+        <li>Read out a scalar/vector prediction:
 
-        <li>Read out a scalar/vector prediction:</li>
-
-        </ol>
+        
 
 
 
         <p>&nbsp;   $$p(x)=V+\langle S,\exp(M(x))\rangle$$.</p>
+        </li>
+        </ol>
 
 
         <p>This allow features to interact together.  The series expansion contains <strong>all powers</strong>:</p>
