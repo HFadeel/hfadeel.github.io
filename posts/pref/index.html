@@ -300,10 +300,10 @@
 <h2>What&#39;s Wrong with BTL? Three Core Problems</h2>
 <h3>1. The Averaging Problem</h3>
 <p>When human preferences are genuinely diverse, BTL doesn&#39;t capture that diversity—it averages over it. Consider a scenario where half your annotators prefer detailed, technical responses while the other half prefer concise, accessible ones. BTL will learn a reward function that produces... medium-length, moderately technical responses that neither group actually wants.</p>
-<p>This isn&#39;t just theoretically concerning. Recent work from MiCRo (Shen et al., EMNLP 2025) proves that when preferences follow a mixture distribution of diverse subgroups, <strong>a single BTL model incurs an irreducible error</strong>. You cannot fit a unimodal BTL to multimodal preference data without systematic bias.</p>
+<p>This isn&#39;t just theoretically concerning, it's real and have been shown in many areas and different fields. Recent work from MiCRo (Shen et al., EMNLP 2025) proves that when preferences follow a mixture distribution of diverse subgroups, <strong>a single BTL model incurs an irreducible error</strong>. You cannot fit a unimodal BTL to multimodal preference data without systematic bias.</p>
 <p>More formally, if the true preference distribution is a mixture:</p>
 <p>$$P(a_w \succ a_l | x) = \sum_{k=1}^{K} P(z=k|x) \cdot P(a_w \succ a_l | x, z=k)$$</p>
-<p>where z indexes latent subpopulations, then standard BTL training will converge to something like the mean of these subpopulations.</p>
+<p>where \(z\) indexes latent subpopulations, then standard BTL training will converge to something like the mean of these subpopulations.</p>
 <h3>2. Annotation Bias and Majority Dominance</h3>
 <p>The averaging problem becomes particularly pernicious when combined with imbalanced annotation populations. If 80% of your annotators come from one demographic or hold one set of values, the resulting reward model will largely ignore the remaining 20%.</p>
 <p>The VPL paper (Poddar et al., NeurIPS 2024) illustrates this with an important example: imagine a college admissions chatbot where wealthy annotators have weak preferences about financial aid information, while low-income annotators strongly need it. Standard RLHF will learn to deprioritize financial aid discussions, actively harming the minority group.</p>
@@ -333,7 +333,7 @@
 <hr>
 <h3>Solution 2: MiCRo (Mixture Modeling + Context-aware Routing)</h3>
 <p>Instead of one reward function trying to please everyone, MiCRo learns K different &quot;expert&quot; reward functions—one might specialize in users who like detailed responses, another for users who prefer brevity, etc. When a query comes in, a router looks at the context (the prompt, user metadata, or a few calibration questions) and decides which expert(s) to consult. It&#39;s like having a panel of judges with different tastes, and choosing which judges&#39; opinions matter for each case.</p>
-<p><strong>Stage 1 – Mixture Modeling</strong>: Instead of a single reward function, learn K reward functions \({r_{\phi_k}}_{k=1}^K\)
+<p><strong>Stage 1 – Mixture Modeling</strong>: Instead of a single reward function, learn K reward functions \(\{r_{\phi_k}\}_{k=1}^K\)
 with context-dependent mixture weights:</p>
 <p>$$P(a_w \succ a_l | x) = \sum_{k=1}^{K} f_{\psi,k}(x) \cdot \sigma(r_{\phi_k}(x, a_w) - r_{\phi_k}(x, a_l))$$</p>
 <p>where \(f_\psi: \mathcal{X} \rightarrow \Delta_K\) is a router network outputting mixture weights.</p>
