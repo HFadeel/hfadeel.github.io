@@ -463,11 +463,9 @@
 
         </ol>
 
-        <p>&nbsp;   </p>
-
+        
         <p>&nbsp;   \(\phi(x) = Ux\).</p>
 
-        <p>&nbsp;   </p>
 
         <ol start="2">
 
@@ -475,11 +473,9 @@
 
         </ol>
 
-        <p>&nbsp;   </p>
 
         <p>&nbsp;   $$M(x) = B + \sum_{a=1}^{d} \phi_a(x)\, T_a,$$</p>
 
-        <p>&nbsp;   </p>
 
         <p>&nbsp;   where each \(T_a \in \mathbb{R}^{n\times n}\) is a learned “template” matrix, and B is a learned bias matrix.</p>
 
@@ -491,11 +487,11 @@
 
         </ol>
 
-        <p>&nbsp;   </p>
+
 
         <p>&nbsp;   $$\exp(M) = \sum_{k=0}^{\infty}\frac{1}{k!}M^k$$.</p>
 
-        <p>&nbsp;   </p>
+
 
         <ol start="4">
 
@@ -503,11 +499,10 @@
 
         </ol>
 
-        <p>&nbsp;   </p>
+
 
         <p>&nbsp;   $$p(x)=V+\langle S,\exp(M(x))\rangle$$.</p>
 
-        <p>&nbsp;   </p>
 
         <p>This allow features to interact together.  The series expansion contains <strong>all powers</strong>:</p>
 
@@ -517,7 +512,7 @@
 
         <p>The paper shows how choosing structured templates can encode specific monomials and can represent periodic functions via exponentials of rotation-like generators, yielding extrapolation behavior in certain synthetic tasks.</p>
 
-        <p>Matrix exponentiation is scientifically more expensive that element-wise activations and introduces numerical stability issues. But as a representation lens, it cleanly demonstrates a design principle:</p>
+        <p>Matrix exponentiation is impractical, it's scientifically more expensive that element-wise activations, and introduces numerical stability issues. But as a representation lens, it cleanly demonstrates a design principle:</p>
 
         <blockquote>
 
@@ -529,25 +524,25 @@
 
         <p>Instead of forcing multiplication to emerge indirectly, we can add a small budget of explicit bilinear terms:</p>
 
-        <p>$$\text{Block}(x)=W_2\,\sigma(W_1 x)\;+\;\sum_{k=1}^{K} v_k \,\big(a_k^\top x\big)\big(b_k^\top x\big)$$.</p>
+        <p>$$\text{Block}(x)=W_2\,\sigma(W_1 x)\;+\;\sum_{k=1}^{K} v_k \,\big(a_k^\top x\big)\big(b_k^\top x\big)$$</p>
 
         <ul>
 
         <li>
 
-        <p>K controls interaction capacity.</p>
+        K controls interaction capacity.
 
         </li>
 
         <li>
 
-        <p>This is a low-rank quadratic augment: it captures key crosses without a full \(O(d^2)\) quadratic layer.</p>
+        This is a low-rank quadratic augment: it captures key crosses without a full \(O(d^2)\) quadratic layer.
 
         </li>
 
         <li>
 
-        <p>It targets the “interaction order per layer” constraint directly.</p>
+        It targets the “interaction order per layer” constraint directly.
 
         </li>
 
@@ -557,7 +552,7 @@
 
         <p>Instead of one global basis everywhere (one specific activation function), allow the model to choose/mix bases depending on input. A general formulation:</p>
 
-        <p>$$h(x) = \sum_{m=1}^{N} \alpha_m(x)\\,\phi_m(Wx), \quad \alpha(x)=\mathrm{softmax}\!\left(\frac{Gx}{\tau}\right)$$.</p>
+        <p>$$h(x) = \sum_{m=1}^{N} \alpha_m(x)\,\phi_m(Wx),\quad\alpha(x)=\mathrm{softmax}\!\left(\frac{Gx}{\tau}\right)$$.</p>
 
         <p>Where \(\phi_m\) could include:</p>
 
