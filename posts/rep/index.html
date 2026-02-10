@@ -552,61 +552,62 @@
 
         <p>Instead of one global basis everywhere (one specific activation function), allow the model to choose/mix bases depending on input. A general formulation:</p>
 
-        <p>$$h(x) = \sum_{m=1}^{N} \alpha_m(x)\,\phi_m(Wx),\quad\alpha(x)=\mathrm{softmax}\!\left(\frac{Gx}{\tau}\right)$$.</p>
+        <p>$$h(x) = \sum_{m=1}^{N} \alpha_m(x)\,\phi_m(Wx),\quad\alpha(x)=\mathrm{softmax}\!\left(\frac{Gx}{\tau}\right)$$</p>
 
-        <p>Where \(\phi_m\) could include:</p>
-
-        <ul>
-
-        <li>
-
-        <p>piecewise or smooth piecewise (ReLU/SiLU/GELU).</p>
-
-        </li>
-
-        <li>
-
-        <p>periodic or semi-periodic (sin⁡e, Fourier features, unbounded sine snake \(x + 1/a \sin^2(ax)\)).</p>
-
-        </li>
-
-        <li>
-
-        <p>polynomial/spline bases.</p>
-
-        </li>
-
-        <li>
-
-        <p>multiplicative gates.</p>
-
-        </li>
-
-        </ul>
-
-        <p>This can be seen as a continuum between:</p>
+        <p>Where \(\phi_m\) could include:
 
         <ul>
 
         <li>
 
-        <p>mixture-of-activations.</p>
+        piecewise or smooth piecewise (ReLU/SiLU/GELU).
 
         </li>
 
         <li>
 
-        <p>mixture-of-subspaces.</p>
+        periodic or semi-periodic (sin⁡e, Fourier features, unbounded sine snake \(x + 1/a \sin^2(ax)\)).
 
         </li>
 
         <li>
 
-        <p>mixture-of-experts.</p>
+        polynomial/spline bases.
+
+        </li>
+
+        <li>
+
+        multiplicative gates.
 
         </li>
 
         </ul>
+
+        This can be seen as a continuum between:
+
+        <ul>
+
+        <li>
+
+        mixture-of-activations.
+
+        </li>
+
+        <li>
+
+        mixture-of-subspaces.
+
+        </li>
+
+        <li>
+
+        mixture-of-experts.
+
+        </li>
+
+        </ul>
+        </p>
 
         <p>The goal is to increase representational efficiency without paying full compute everywhere. But again there are optimization challenges and considerations, such as:</p>
 
@@ -614,19 +615,19 @@
 
         <li>
 
-        <p>The loss landscape of a piecewise and smooth piecewise (e.g. Relu, SiLu) is generally convex-ish (or at least easy to navigate). The loss landscape of a Sine network is filled with infinite local minima. It is essentially a fractal surface making optimization challenging.</p>
+        The loss landscape of a piecewise and smooth piecewise (e.g. Relu, SiLu) is generally convex-ish (or at least easy to navigate). The loss landscape of a Sine network is filled with infinite local minima. It is essentially a fractal surface making optimization challenging.
 
         </li>
 
         <li>
 
-        <p>Sines are bounded between -1 and 1. This can lead to vanishing gradients in very deep networks compared to ReLU</p>
+        Sines are bounded between -1 and 1. This can lead to vanishing gradients in very deep networks compared to ReLU
 
         </li>
 
         <li>
 
-        <p>Selection collapse</p>
+        Selection collapse
 
         </li>
 
@@ -648,25 +649,25 @@
 
         <li>
 
-        <p>What interaction algebra should be cheap?</p>
+        What interaction algebra should be cheap?
 
         </li>
 
         <li>
 
-        <p>What bases should be available, and how should they be selected?</p>
+        What bases should be available, and how should they be selected?
 
         </li>
 
         <li>
 
-        <p>What training objectives encourage reuse and factorization instead of redundant entanglement?</p>
+        What training objectives encourage reuse and factorization instead of redundant entanglement?
 
         </li>
 
         <li>
 
-        <p>Which improvements provide real gains under modern constraints (stability, hardware efficiency, scaling behavior)?</p>
+        Which improvements provide real gains under modern constraints (stability, hardware efficiency, scaling behavior)?
 
         </li>
 
