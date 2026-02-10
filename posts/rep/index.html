@@ -301,7 +301,7 @@
 
         <li>
 
-        Whether the representation is <strong>modular / reusable</strong> vs “spaghetti.”.
+        Whether the representation is <strong>modular / reusable</strong> vs “spaghetti”.
 
         </li>
 
@@ -335,9 +335,9 @@
 
         <p>Conditioned on a <em>fixed</em> gating pattern across layers, each ReLU is either identity (“on”) or zero (“off”). The entire network collapses to an affine function:</p>
 
-        <p>$$f(x) = A_{g}x + c_{g}$$.</p>
+        <p>$$f(x) = A_{g}x + c_{g}$$</p>
 
-        <p>So the input space is partitioned into regions (polytopes) where the gating pattern is constant, and on each region the network is affine. This is the intuitive core formalized in <em>A Spline Theory of Deep Networks</em> (<a href="https://proceedings.mlr.press/v80/balestriero18b/balestriero18b.pdf">Balestriero \&amp; Baraniuk, 2018</a>), which expresses such networks using <strong>max-affine spline operators (MASOs)</strong> and shows how these models implement a “template matching” view: choose an affine template based on region membership.</p>
+        <p>So the input space is partitioned into regions (polytopes) where the gating pattern is constant, and on each region the network is affine. This is the intuitive core formalized in <em>A Spline Theory of Deep Networks</em> (<a href="https://proceedings.mlr.press/v80/balestriero18b/balestriero18b.pdf">Balestriero &amp; Baraniuk, 2018</a>), which expresses such networks using <strong>max-affine spline operators (MASOs)</strong> and shows how these models implement a “template matching” view: choose an affine template based on region membership.</p>
 
         <p>Note: this also applies to other similar activation functions e.g. Swish, SiLU, ELU.</p>
 
@@ -345,7 +345,7 @@
 
         <h2 id="what-piecewise-really-means-for-representation">What “piecewise” really means for representation</h2>
 
-        <p>Piecewise-linear nets represent functions by partitioning input space into linear regions. Depth can blow up the number of regions (in principle), which is why they’re expressive and universal, but not necessarily efficient. For global algebraic structure: multiplicative relations, periodic functions, or high-degree polynomial interactions may require <strong>many regions</strong> to approximate well, even if the underlying structure is simple in a different coordinate system or basis. Even with so many regions the approximation might be brittle or weak.</p>
+        <p>Piecewise-linear networks represent functions by partitioning the input space into linear regions. Depth can, in principle, cause the number of regions to blow up, which explains their expressivity and universality—but not necessarily their efficiency. Functions with global algebraic structure—such as multiplicative relations, periodic behavior, or high-degree polynomial interactions—may require many regions to approximate well, even when the underlying structure is simple in a different coordinate system or basis. Even with a large number of regions, the resulting approximation may still be brittle or weak.</p>
 
         <hr />
 
@@ -379,25 +379,25 @@
 
         <li>
 
-        <p>adaptation,</p>
+        adaptation.
 
         </li>
 
         <li>
 
-        <p>compositional generalization,</p>
+        compositional generalization.
 
         </li>
 
         <li>
 
-        <p>robustness under distribution shift,</p>
+        robustness under distribution shift.
 
         </li>
 
         <li>
 
-        <p>interference during fine-tuning.</p>
+        interference during fine-tuning.
 
         </li>
 
@@ -409,7 +409,7 @@
 
         <h2 id="ideas-for-different-primitive-for-more-efficient-representation">Ideas for different primitive for more efficient representation</h2>
 
-        <p>Let me preface by saying: I don’t have the solution and the right solutions should take into account our hardware (i.e. GPU limitations - FLOPs, Memory bandwidth, and Special Functions). But let’s think together.</p>
+        <p>Let me preface by saying: I don’t have the solution and the right solutions should take into account our hardware (i.e. GPU limitations - FLOPs, Memory bandwidth, and SFUs). But let’s think together and come up with ideas.</p>
 
         <p>A pragmatic way to talk about representational power is:</p>
 
@@ -425,25 +425,25 @@
 
         <li>
 
-        <p>number of regions for piecewise-affine models,</p>
+        number of regions for piecewise-affine models.
 
         </li>
 
         <li>
 
-        <p>polynomial degree / interaction order for algebraic models,</p>
+        polynomial degree / interaction order for algebraic models.
 
         </li>
 
         <li>
 
-        <p>number of basis functions or experts used,</p>
+        number of basis functions or experts used.
 
         </li>
 
         <li>
 
-        <p>effective rank / sparsity of interactions.</p>
+        effective rank / sparsity of interactions.
 
         </li>
 
