@@ -264,11 +264,11 @@
 <p>In Parts 1 and 2, we established what offline RL is, its potential benefits, and why it remains largely unused despite these benefits. The challenges are both practical (engineering complexity, reward annotation burden, brittle O2O transitions) and fundamental (quadratic error accumulation over the horizon).</p>
 <p>In this final part, we examine recent research that directly addresses these obstacles.</p>
 <h1 id="addressing-the-curse-of-horizon">Addressing the Curse of Horizon</h1>
-<p>The $H^2$ error accumulation in TD learning is perhaps the most fundamental barrier to scaling offline RL. Two recent approaches attack this problem from different angles.</p>
+<p>The \(H^2\) error accumulation in TD learning is perhaps the most fundamental barrier to scaling offline RL. Two recent approaches attack this problem from different angles.</p>
 <h2 id="horizon-reduction-sharsa-and-n-step-methods">Horizon Reduction: SHARSA and n-step Methods</h2>
 <p><a href="https://arxiv.org/abs/2506.04168">Park et al. (2025)</a> conducted a systematic study of offline RL scaling with datasets up to 1B transitions—1000× larger than typical offline RL benchmarks. Their findings are striking: standard offline RL methods (IQL, CRL, SAC+BC) completely fail on complex, long-horizon tasks even with massive datasets. Performance saturates far below optimal, regardless of model size or hyperparameter tuning.</p>
-<p><strong>Value horizon reduction</strong>: Use n-step returns instead of 1-step TD. This reduces the number of recursive updates by a factor of n, directly attacking the $H^2$ term.</p>
-<p><strong>Policy horizon reduction</strong>: Use hierarchical policies that decompose long-horizon goals into shorter subgoal-reaching problems. A high-level policy $\pi^h(w|s,g)$ outputs subgoals; a low-level policy $\pi^\ell(a|s,w)$ executes them. This happens to be the modern approach in robotics</p>
+<p><strong>Value horizon reduction</strong>: Use n-step returns instead of 1-step TD. This reduces the number of recursive updates by a factor of n, directly attacking the \(H^2\) term.</p>
+<p><strong>Policy horizon reduction</strong>: Use hierarchical policies that decompose long-horizon goals into shorter subgoal-reaching problems. A high-level policy \(\pi^h(w|s,g)\) outputs subgoals; a low-level policy \(\pi^\ell(a|s,w)\) executes them. This happens to be the modern approach in robotics</p>
 <p>Another idea, <strong>SHARSA</strong> (Scalable Horizon-Aware RSA), which combines:</p>
 <ul>
 <li>Flow-matching behavioral cloning for expressive policy representation</li>
@@ -278,13 +278,13 @@
 </ul>
 <p>The results are great. On tasks where standard offline RL achieves 0% success even with 1B samples, SHARSA achieves 50-100% success. The key insight: horizon reduction isn&#39;t just a nice-to-have—it&#39;s necessary for scaling.</p>
 <h2 id="transitive-rl-divide-and-conquer-value-learning">Transitive RL: Divide and Conquer Value Learning</h2>
-<p><a href="https://arxiv.org/abs/2510.22512"><strong>Transitive RL (TRL)</strong></a> exploits a divide-and-conquer structure specific to goal-conditioned RL.</p>
+<p><a href="https://arxiv.org/abs/2510.22512">Transitive RL (TRL)</a> exploits a divide-and-conquer structure specific to goal-conditioned RL.</p>
 <p>The key observation: in goal-conditioned RL, temporal distances satisfy a triangle inequality:</p>
-<p>$d^<em>(s, g) \leq d^</em>(s, w) + d^*(w, g)$</p>
+<p>$$d^*(s, g) \leq d^*(s, w) + d^*(w, g)$$</p>
 <p>This enables a transitive Bellman update:</p>
-<p>$V(s, g) \leftarrow \max_{w \in S} V(s, w) \cdot V(w, g)$</p>
-<p>Instead of propagating value one step at a time (TD) or summing over entire trajectories (MC), TRL combines two equal-sized trajectory segments. In theory, this reduces the number of biased recursions from $O(H)$ to $O(\log H)$</p>
-<p>The practical challenge is the $\max_{w}$ operator—naively maximizing over all possible subgoals leads to catastrophic overestimation. TRL addresses this with:</p>
+<p>$$V(s, g) \leftarrow \max_{w \in S} V(s, w) \cdot V(w, g)$$</p>
+<p>Instead of propagating value one step at a time (TD) or summing over entire trajectories (MC), TRL combines two equal-sized trajectory segments. In theory, this reduces the number of biased recursions from \(O(H)\) to \(O(\log H)\)</p>
+<p>The practical challenge is the \(\max_{w}\) operator—naively maximizing over all possible subgoals leads to catastrophic overestimation. TRL addresses this with:</p>
 <ul>
 <li><strong>In-sample maximization</strong>: Only consider subgoals that appear in dataset trajectories</li>
 <li><strong>Expectile regression</strong>: Soft approximation of the max operator</li>
@@ -328,7 +328,7 @@
 <li>A randomly initialized Q-function doesn&#39;t actively discourage exploration of OOD actions</li>
 </ul>
 <p>PORL opens a new path for fine-tuning BC policies directly with RL, without needing to first convert to an offline RL formulation.</p>
-<hr>
+<br/>
 <p>So, is offline RL ready for prime time? Not yet. SHARSA and TRL still can&#39;t fully solve the hardest benchmarks even with billion-scale data. The O2O methods work well on standard benchmarks but haven&#39;t been validated at the scale and complexity of real autonomous systems. </p>
 <p>But for the first time, we have principled explanations for why offline RL fails at scale, and methods that directly target those failure modes. The gap between offline RL&#39;s promise and its practice is narrowing, but it still there.</p>
 
