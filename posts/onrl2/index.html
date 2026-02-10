@@ -263,11 +263,12 @@
 
 <p>In the previous post, we established the benefits of Offline RL. But why offline RL is not widely used yet?</p>
 <p>Based on my experience in Autonomous Vehicle and LLM and my limited exposure to robotics, I can argue that offline RL is practically not used (autonomous vehicle companies mostly use BC, GAIL, and Online RL, LLM uses BC and Online RL, Board Games - AlphaGo, AlphaZero, and MuZero uses Model Based RL and MCTS, Robotic OpenVLA, Pi policies uses BC and Online RL). In fact we can argue that most of the current real-world successes of RL have been achieved with variant of on-policy RL algorithms (e.g., REINFORCE, PPO, GRPO) which require fresh, newly sampled rollouts from the current policy or slightly older policy, and cannot reuse old data. This is not a problem in some settings like board games and LLMs, where we can cheaply generate as many rollouts as we want. However, it is a significant limitation in most real-world problems. For example, in autonomous vehicles and robotics, it takes more than several months in the real world to generate the amount of samples used to post-train a language model with RL. Yet, Offline RL hasn’t been used, why?</p>
-<p>We can categorize the challenges with offline RL in two main categories:</p>
+<p>We can categorize the challenges with offline RL in two main categories:
 <ul>
 <li>Practical Challenges</li>
 <li>Core Technical Challenges</li>
 </ul>
+</p>
 <h1 id="practical-challenges-">Practical Challenges:</h1>
 <h2 id="engineering-scalability-complexity-and-the-human-factor">Engineering, Scalability, Complexity, and the Human factor</h2>
 <p>Offline RL training algorithms requires a significant amount of memory and training of multiple network simultaneously (e.g. multiple critics, target critics, policies, behavior models (generators), and/or ensembles) and requires at least 2x the wall-clock time compare to BC. While this works for small policy models, it makes it hard to adopt for large models. One of the appeal of GRPO and RLOO is that they forgo the need for value model which make LLM RL training feasible and faster.</p>
@@ -300,7 +301,7 @@
 <p>This <strong>quadratic scaling (\(H^2\))</strong> is a significant problem for long-horizon tasks. For an autonomous vehicle driving task or robotic task with a horizon of 500 steps, the bias multiplier is on the order of 250,000. Even if massive datasets reduce the single-step error \(\epsilon\) significantly, the \(H^2\) term magnifies the remaining microscopic bias until it overwhelms the signal. This explains why simply &quot;scaling up&quot; Offline RL with more data and larger models often yields diminishing returns or failure, whereas BC continues to improve.</p>
 <p>Practitioners observe that Offline RL works on short-horizon &quot;toy&quot; tasks (like HalfCheetah, Ant-Maze) but fails on complex, multi-stage robotic tasks where \(H\) is large. Even with huge amounts of data, empirical studies showed that current offline RL methods don’t scale or even improve.</p>
 
-<img style="width:900px;display:block;margin-left:auto;margin-right:auto;" data-proofer-ignore data-src="/assets/img/blog/of-2-1.png" alt="desktopview" />
+<p><img style="width:900px;display:block;margin-left:auto;margin-right:auto;" data-proofer-ignore data-src="/assets/img/blog/of-2-1.png" alt="desktopview" /></p>
 
 <p>Given these challenges—engineering overhead, harder offline-to-online transitions, reward annotation burdens, and fundamental scaling limits—it&#39;s no surprise that practitioners default to simpler alternatives. In Part 3, we&#39;ll examine recent advances that aim to address these issues and ask whether offline RL&#39;s moment may finally be approaching.</p>
 
