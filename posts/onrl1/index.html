@@ -268,7 +268,7 @@
 <h2 id="what-is-offline-rl-">What is Offline RL?</h2>
 <p>In standard (online) RL, an agent learns by interacting with an environment: it takes actions, observes rewards, and updates its policy through this feedback loop. Formally, at each timestep the agent is in state \(s_t\), takes action \(a_t\), receives reward \(r_t\), and transitions to state \(s_{t+1}\). The objective is to </p>
 <p>maximize expected discounted return:</p>
-<p>$$J(\pi)=\mathbb{E}{\tau\sim \pi}\left[\sum{t=0}^{\infty}\gamma^t r_t\right]$$</p>
+<p>$$J(\pi)=\mathbb{E}_{\tau\sim \pi}\left[\sum_{t=0}^{\infty}\gamma^t r_t\right]$$</p>
 <p>This work well, but in real-world applications we often can&#39;t afford the luxury of extensive exploration. You can&#39;t let a robot randomly experiment with surgical procedures, or allow a self-driving car to learn collision avoidance through actual collisions.</p>
 <p>The natural alternative is simulation—but simulation has its own drawbacks: it can be computationally expensive, struggles to capture complex real-world dynamics, and still leaves sim-to-real domain adaptation as an open problem.</p>
 <p>So practitioners often turn to behavior cloning (BC), treating the decision-making problem as supervised learning: given state \(s\), predict the action \(a\) that an expert would take. This is simple and scales well—which is why most robotics and autonomous driving companies relied on it for years. But BC ignores the sequential nature of the problem: errors compound over time as the agent drifts into states the expert never visited, a phenomenon known as <strong>distribution shift</strong> or <strong>covariate shift</strong>.</p>
