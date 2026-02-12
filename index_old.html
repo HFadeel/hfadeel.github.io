@@ -226,9 +226,9 @@
                 </h1>
                 <div class="post-content">
                   <p>
-                    Group Relative Policy Optimization (GRPO) and REINFORCE Leave-One-Out (RLOO) offer a
+                    GRPO and RLOO offer a
                     memory-efficient alternative
-                    to Proximal Policy Optimization (PPO)
+                    to PPO
                     for training large language models by eliminating the need for a learned value function.
                     However, we identify four sources of bias and instability in GRPO—length bias, difficulty
                     normalization bias,
@@ -261,7 +261,7 @@
                 </h1>
                 <div class="post-content">
                   <p>
-                    Reinforcement learning from verifiable rewards (RLVR) improves LLM reasoning but suffers from severe
+                    RLVR improves LLM reasoning but suffers from severe
                     credit assignment
                     issues due to sparse, end-of-trajectory outcome rewards. Process reward models partially address
                     this but rely on
@@ -271,9 +271,7 @@
                     measuring changes
                     in the probability of reaching a correct answer after each reasoning step, and an entropy-weighted
                     advantage that
-                    modulates token-level updates based on model uncertainty. Together, these signals form a unified and
-                    scalable reward
-                    framework for reasoning-focused RL.
+                    modulates token-level updates based on model uncertainty.
                   </p>
                 </div>
                 <div class="post-meta text-muted d-flex justify-content-between">
@@ -456,17 +454,14 @@
                 <div class="post-content">
                   <p>
                     Massive amounts of effort and money have gone into scaling (e.g. compute, data, parameters), and some architectural and
-                    efficiency tweaks (e.g., Mixture-of-Experts, attention variants, better optimizers, better parallelism). All of which
-                    are valuable. But they also raise an uncomfortable question:
+                    efficiency tweaks. All of which are valuable. But they also raise an uncomfortable question:
                     
                     <blockquote>If our deep neural networks are already “universal approximators,” Why does it still feel like we’re
                       brute-forcing representation—sometimes learning *good performance* without learning *good structure? why do LLMs need
                       all the web text to learn how to write basic sentences? Why it takes millions (if not billions) of images to generate
                       a five-fingered hand image?</blockquote>
-                    This essay argues that the bottleneck is **representational efficiency,** more than anything else, more than raw
-                    expressivity. The headline “universal approximation” is correct but incomplete: it does not tell you how many
-                    parameters, how many regions, how much depth, or how much data is needed to represent the structure of interest *in a
-                    way that training actually finds*.
+                    This essay argues that the bottleneck is <b>representational efficiency</b>, more than anything else.
+                    The headline “universal approximation” is correct but incomplete.
 
                   </p>
                 </div>
@@ -514,12 +509,11 @@
                 </h1>
                 <div class="post-content">
                   <p>
-                    Knowledge distillation (KD) transfers information from teacher models to a student, and is often used in a same-capacity
+                    KD transfers information from teacher models to a student, and is often used in a same-capacity
                     setting to improve a model by distilling dark knowledge. We formalize same-size logit distillation with temperature
                     scaling, analyze why naïve same-size KD is frequently teacher-bounded, and propose Reliability-Weighted Knowledge
                     Distillation (WKD), a per-example weighting scheme that downweights incorrect teachers while preserving logit scale.
                     Experiments on SQuAD v2.0 show that WKD improves F1 and EM over standard KD.
-                    How much Attention is really needed?
                   </p>
                 </div>
                 <div class="post-meta text-muted d-flex justify-content-between">
@@ -572,7 +566,7 @@
                 </h1>
                 <div class="post-content">
                   <p>
-                    abel smoothing regularizes models by replacing one-hot targets with soft labels, reducing over-confidence and improving
+                    Label Smoothing regularizes models by replacing one-hot targets with soft labels, reducing over-confidence and improving
                     generalization. However, uniform smoothing assumes all incorrect classes are equally likely, which is poorly suited to
                     sequence tasks with positional labels. Gaussian Label Smoothing (GLS) addresses this by replacing the uniform noise
                     distribution with a Gaussian centered on the gold position, assigning higher probability to nearby tokens and better
@@ -599,14 +593,10 @@
                 </h1>
                 <div class="post-content">
                   <p>
-                    A recurring failure mode in AI research is **task isolation**: we optimize narrowly scoped problems (either: language,
+                    A recurring failure mode in AI research is <b>task isolation</b>: we optimize narrowly scoped problems (either: language,
                     vision, planning, or control) as if these faculties were separable in the real world. This produces systems that are
                     statistically competent on benchmarks yet brittle under distribution shift, weak at commonsense inference, and poor at
                     connecting perception to action.
-                    
-                    A more scientifically grounded path toward generalist AI is to treat intelligence as an **integrated
-                    perception–action–language loop**: learning representations that preserve the structure of the environment, support
-                    counterfactual/causal reasoning, and ground symbols in sensorimotor experience.
                   </p>
                 </div>
                 <div class="post-meta text-muted d-flex justify-content-between">
