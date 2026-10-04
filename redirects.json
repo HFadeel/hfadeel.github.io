@@ -1,1 +1,26 @@
-{"/norobots/":"https://hfadeel.github.io//404.html","/assets/":"https://hfadeel.github.io//404.html","/posts/":"https://hfadeel.github.io//404.html"}
+{
+  "/norobots/": "https://hfadeel.github.io//404.html",
+  "/assets/": "https://hfadeel.github.io//404.html",
+  "/posts/": "https://hfadeel.com/",
+  "/": "https://hfadeel.com/",
+  "/posts/ai/": "https://hfadeel.com/how-academic-division-of-ai-could-limits-agi-progress",
+  "/posts/count-zeros/": "https://hfadeel.com/",
+  "/posts/dc/": "https://hfadeel.com/decoupled-transformer",
+  "/posts/gls/": "https://hfadeel.com/gaussian-label-smoothing",
+  "/posts/kd1/": "https://hfadeel.com/knowledge-distillation-can-a-student-exceed-their-teacher-performance",
+  "/posts/old_tricks/": "https://hfadeel.com/",
+  "/posts/onrl1/": "https://hfadeel.com/on-offline-rl-part-1",
+  "/posts/onrl2/": "https://hfadeel.com/on-offline-rl-part-2",
+  "/posts/onrl3/": "https://hfadeel.com/on-offline-rl-part-3",
+  "/posts/pref/": "https://hfadeel.com/preference-rl-is-hard-whose-preference",
+  "/posts/rep/": "https://hfadeel.com/representational-efficiency-in-deep-learning",
+  "/posts/rh/": "https://hfadeel.com/mitigations-for-reward-hacking",
+  "/posts/rh - Copy/": "https://hfadeel.com/mitigations-for-reward-hacking",
+  "/posts/road1/": "https://hfadeel.com/road-electra-robustly-optimized-and-distilled-electra-1",
+  "/posts/road2/": "https://hfadeel.com/road-electra-robustly-optimized-and-distilled-electra-2",
+  "/posts/roae1/": "https://hfadeel.com/",
+  "/posts/sl/": "https://hfadeel.com/is-scaling-law-is-slowing",
+  "/posts/tok/": "https://hfadeel.com/towards-tokenization-free-language-models-research-trends",
+  "/posts/understanding/": "https://hfadeel.com/",
+  "/posts/y25p1/": "https://hfadeel.com/"
+}
